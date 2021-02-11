@@ -1,0 +1,53 @@
+<style>
+    #filtres-container{
+        display: flex;
+        flex-direction: column;
+        border: solid aliceblue;
+        height: 40em;
+        width: 15em;
+        overflow-y: auto;
+    }
+    .titre{
+        font-size: 1.5em;
+        margin-left: 2em;
+    }
+    .sous-titre{
+        font-size: 1.2em;
+        margin-left: 1em;
+        margin-bottom: 0.5em;
+    }
+    .filtres-checkbox{
+        margin-left: -1em;
+    }
+    hr{
+        width: 10em;
+        margin-top: -0.1em;
+    }
+    ul{
+        list-style: none;
+    }
+</style>
+
+<div id="filtres-container">
+    <div class="titre">Filtres</div>
+    <hr>
+
+    <div class="sous-titre">
+        Type d'équipement
+    </div>
+    <ul>
+        <li *ngFor="let equipement of typeEquipement">
+            <mat-checkbox class="filtres-checkbox" color="primary">{{equipement.name}}</mat-checkbox>
+        </li>
+    </ul>
+    <div class="sous-titre">
+        Equipements
+    </div>
+    <ul>
+        <li *ngFor="let stat of statistiques">
+            <mat-checkbox color="primary">{{stat.name}}</mat-checkbox>
+        </li>
+    </ul>
+</div>
+
+<app-footer></app-footer>

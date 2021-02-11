@@ -1,0 +1,63 @@
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+    form{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-inscription{
+        margin-top: 5em;
+    }
+    .form-group{
+        margin: 0.5em;
+    }
+    .form-label{
+        font-size: 1.3em;
+    }
+    .inscription-input{
+        width: 25em;;
+    }
+    
+    #btn-submit{
+        width: 15em;
+    }
+    #forgotten-password{
+        font-size: 1em;
+        color:gray;
+    }
+
+    #forgotten-password:hover{
+        text-decoration: underline;
+    }
+
+</style>
+
+<div class="container">
+    <form class=form-inscription>
+        <div class="form-group">
+            <label for="login" class="form-label">Login</label>
+            <input type="text" id="login" class="inscription-input form-control">    
+        </div>
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" id="email" class="inscription-input form-control">    
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" id="password" class="inscription-input form-control">
+        </div>
+        <div class="form-group">
+            <label for="confirm-password" class="form-label">Confirmez votre mot de passe</label>
+            <input type="password" id="confirm-password" class="inscription-input form-control">
+        </div>
+           
+        <button id="btn-submit" class="btn btn-success form-group">Valider mon inscription</button>
+
+    </form>
+
+</div>
+
+<app-footer></app-footer>

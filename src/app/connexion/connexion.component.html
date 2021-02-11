@@ -1,0 +1,56 @@
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+
+    form{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-connexion{
+        margin-top: 10em;
+    }
+    .form-group{
+        margin: 0.5em;
+    }
+    .form-label{
+        font-size: 1.3em;
+    }
+    .connexion-input{
+        width: 25em;;
+    }
+    
+    #btn-submit{
+        width: 15em;
+    }
+    #forgotten-password{
+        font-size: 1em;
+        color:gray;
+    }
+
+    #forgotten-password:hover{
+        text-decoration: underline;
+    }
+
+</style>
+
+<div class="container">
+    <form class=form-connexion>
+        <div class="form-group">
+            <label for="login" class="form-label">Login</label>
+            <input type="text" id="login" class="connexion-input form-control">    
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input type="password" id="password" class="connexion-input form-control">
+            <a id="forgotten-password">Mot de passe oublié ?</a>    
+        </div>
+           
+        <button id="btn-submit" class="btn btn-success form-group">Connexion</button>
+
+    </form>
+</div>
+
+<app-footer></app-footer>
