@@ -1,12 +1,39 @@
 <style>
     #recherche-page{
         display: flex;
+        margin-top: 2em;
+        justify-content: space-between;
+    }
+    #searchBar{
+        font-size: 1em;
+    }
+    #recherche-div{
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+    #liste-equipements{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
         border: solid;
-        margin-top: 4em;;
     }
 </style>
 
 <div id="recherche-page">
     <app-filtres></app-filtres>
+    <div id="recherche-div" class="col-8">
+        <mat-form-field id="searchBar" appearance="outline">
+            <mat-label>Recherche d'équipement</mat-label>
+            <input matInput type="text" placeholder="Ex : Cape du piou bleu"/>
+        </mat-form-field>
 
+        <div id="liste-equipements">
+            <div *ngFor="let item of equipements">
+                <app-equipement [item]=item></app-equipement>
+            </div>
+        </div>
+    </div>
+    <div id="div-arrow" class="col-1"></div>
 </div>
+<app-footer></app-footer>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-filtres',
@@ -11,6 +11,7 @@ export class FiltresComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 
   typeEquipement = [
     {name: "Cape"},
@@ -62,7 +63,11 @@ export class FiltresComponent implements OnInit {
     {name: "% eau"},
     {name: "Tacle"},
     {name: "Fuite"},
-    {name: "Prospection"}
+    {name: "Prospection"},
+    {name: "Ret Pa"},
+    {name: "Ret Pm"},
+    {name: "Res Pa"},
+    {name: "Res Pm"},
   ]
 
   

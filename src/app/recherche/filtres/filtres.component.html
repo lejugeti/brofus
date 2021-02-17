@@ -3,9 +3,10 @@
         display: flex;
         flex-direction: column;
         border: solid aliceblue;
-        height: 40em;
-        width: 15em;
+        height: 30em;
+        width: 20em;
         overflow-y: auto;
+        position: sticky;
     }
     .titre{
         font-size: 1.5em;
@@ -18,6 +19,17 @@
     }
     .filtres-checkbox{
         margin-left: -1em;
+    }
+    #level-container{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 1em;
+    }
+    .level-input{
+        width: 3.5em;
+        margin-left: 1em;
+        margin-right: 1em;
     }
     hr{
         width: 10em;
@@ -32,6 +44,15 @@
     <div class="titre">Filtres</div>
     <hr>
 
+    <div class="filtre-section">
+        <div class=" sous-titre">Level</div>
+        <div id="level-container">
+            <input class=" form-control level-input" type="text" placeholder="Min"/>
+            <div> - </div>
+            <input class=" form-control level-input" type="text" placeholder="Max"/>    
+        </div>
+    </div>
+
     <div class="sous-titre">
         Type d'équipement
     </div>
@@ -41,7 +62,7 @@
         </li>
     </ul>
     <div class="sous-titre">
-        Equipements
+        Statistiques
     </div>
     <ul>
         <li *ngFor="let stat of statistiques">
@@ -49,5 +70,3 @@
         </li>
     </ul>
 </div>
-
-<app-footer></app-footer>

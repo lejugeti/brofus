@@ -1,0 +1,85 @@
+<style>
+    #equipement-container{
+        display: flex;
+        flex-direction: column;
+        width: 19em;
+        border: gray solid;
+        border-radius: 1em;
+        border-width: 0.2em;
+        
+    }
+    #entete{
+        display:flex;
+    }
+    #description{
+        margin-top: 1em;
+    }
+    #photo{
+        height: 5em;
+        width: 5em;
+        margin: 1em;
+        border-radius: 5em;
+    }
+    #titre{
+        font-size: 1.5em;
+    }
+    #infos-complementaires{
+        display: flex;
+        font-size: 0.9em;
+        margin-top: 1em;
+    }
+    #stats{
+        margin-left: 1em;
+    }
+    .stat-ligne{
+        display: flex;
+        margin-bottom: 1em;
+    }
+    .stat-information{
+        font-weight: bold;
+        margin-left: 0.5em;
+    }
+    #logos{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+    .single-logo{
+        margin: 0.5em;
+    }
+    hr{
+        width: 15em;
+    }
+</style>
+
+<div id="equipement-container">
+    <div id="entete">
+        <img id="photo" src="../../../assets/cat.jpg"/>
+        <div id="description">
+            <div id="titre">{{item.nom}}</div>
+            <div id="infos-complementaires">{{item.typeEquipement}} - Niveau {{item.level}}</div>
+        </div>
+    </div>
+    <hr>
+    <div id="stats">
+        <div class="stat-ligne">
+            <div class="stat-intitule">Dernier brisage : </div>
+            <div class="stat-information"> {{item.dernierBrisage}}</div>
+        </div>
+        <div class="stat-ligne">
+            <div class="stat-intitule">Coefficient : </div>
+            <div class="stat-information"> {{item.coefficient}} %</div>
+        </div>
+        <div class="stat-ligne">
+            <div class="stat-intitule">Rentabilité : </div>
+            <div class="stat-information">
+                <div>{{item.rentabiliteKamas}} Kamas</div>
+                <div>{{item.rentabiliteProportion}} %</div>
+            </div>
+        </div>
+    </div>
+    <div id="logos">
+        <fa-icon [icon]="faHeart" class="single-logo"></fa-icon>
+        <fa-icon [icon]="faHeart" class="single-logo"></fa-icon>
+    </div>
+</div>
