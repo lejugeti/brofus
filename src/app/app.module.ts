@@ -19,6 +19,7 @@ import { FiltresComponent } from './recherche/filtres/filtres.component';
 import { FooterComponent } from './footer/footer.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { EquipementComponent } from './recherche/equipement/equipement.component';
+import { CalculateurComponent } from './calculateur/calculateur.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +30,13 @@ import { EquipementComponent } from './recherche/equipement/equipement.component
     FooterComponent,
     RechercheComponent,
     FiltresComponent,
-    EquipementComponent
+    EquipementComponent,
+    CalculateurComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule,
     BrowserAnimationsModule,
     FormsModule,

@@ -9,28 +9,23 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class RechercheComponent implements OnInit {
   
-  item: Array<any>;
   equipements: Array<any> = [];
 
-  constructor(private itemsService: GetItemsService) {
-    this.item = [];
-   }
+  constructor(private itemsService: GetItemsService) {}
 
   ngOnInit(): void {
-    this.itemsService.getSingleEquipment(700).subscribe(data => {
-      this.item = data;
-      console.log(data);
+    this.itemsService.getSingleEquipment(14000).subscribe(data => {
+      // console.log(data);
       this.equipements.push(data)
     });
 
+    // this.itemsService.getEquipments().subscribe(data => {
+    //   data.forEach(item => {
+    //     this.equipements.push(item);
+    //   });
+    // });
   }
   
-  // equipements = [
-  //   { id: 0, nom: "Cape du piou bleu", typeEquipement:"Cape", lvl: 18, pathImg: "link.png", dernierBrisage:"10/10/2020", coefficient: 100, rentabiliteKamas: 24000, rentabiliteProportion: 120 },
-  //   { id: 1, nom: "Cape de Klime", typeEquipement:"Cape", lvl: 200, pathImg: "link.png", dernierBrisage:"10/10/2020", coefficient: 100, rentabiliteKamas: 24000, rentabiliteProportion: 120 },
-  //   { id: 1, nom: "Cape de Klime", typeEquipement:"Cape", lvl: 200, pathImg: "link.png", dernierBrisage:"10/10/2020", coefficient: 100, rentabiliteKamas: 24000, rentabiliteProportion: 120 },
-  //   { id: 1, nom: "cape de klime", typeEquipement:"Cape", lvl: 200, pathImg: "link.png", dernierBrisage:"10/10/2020", coefficient: 100, rentabiliteKamas: 24000, rentabiliteProportion: 120 },
-
-  // ]
+  
 }
 

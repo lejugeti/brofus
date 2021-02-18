@@ -52,16 +52,17 @@
     }
 </style>
 
-<div id="equipement-container">
+
+<div id="equipement-container" [routerLink]="['/calculateur', item._id]">
     <div id="entete">
-        <img id="photo" src="../../../assets/cat.jpg"/>
+        <img id="photo" [src]="imgUrl"/>
         <div id="description">
-            <div id="titre">{{item.nom}}</div>
-            <div id="infos-complementaires">{{item.typeEquipement}} - Niveau {{item.level}}</div>
+            <div id="titre">{{item.name}}</div>
+            <div id="infos-complementaires">{{item.type}} - Niveau {{item.level}}</div>
         </div>
     </div>
     <hr>
-    <div id="stats">
+    <!-- <div id="stats">
         <div class="stat-ligne">
             <div class="stat-intitule">Dernier brisage : </div>
             <div class="stat-information"> {{item.dernierBrisage}}</div>
@@ -77,7 +78,7 @@
                 <div>{{item.rentabiliteProportion}} %</div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div id="logos">
         <fa-icon [icon]="faHeart" class="single-logo"></fa-icon>
         <fa-icon [icon]="faHeart" class="single-logo"></fa-icon>

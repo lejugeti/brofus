@@ -12,22 +12,33 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 export class EquipementComponent implements OnInit {
 
   @Input() item: Item;
+  itemId: number;
   faHeart = faHeart;
+  imgUrl: string;
 
   constructor() { 
     this.item = { 
-      nom: '', 
+      _id: 0,
+      ankamaId: 0,
+      name: '', 
       level: 0, 
-      typeEquipement: '',
-      pathImg: '',
-      dernierBrisage: '',
-      coefficient: 0,
-      rentabiliteKamas: 0,
-      rentabiliteProportion:0
+      type: '',
+      imgUrl: '',
+      url: '',
+      description: '',
+      statistics: [],
+      conditions: [],
+      recipe: [],
+      setId:0
     };
+
+    this.itemId = this.item._id;
+    this.imgUrl = '';
   }
   
   ngOnInit(): void {
+    console.log(this.item);
+
   }
 
 }

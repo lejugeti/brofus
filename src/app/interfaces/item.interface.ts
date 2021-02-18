@@ -1,10 +1,18 @@
 export interface Item{
-    nom: string,
+    _id: number,
+    ankamaId: number,
+    name: string,
     level: number,
-    typeEquipement: string,
-    pathImg: string,
-    dernierBrisage: string,
-    coefficient: number,
-    rentabiliteKamas: number,
-    rentabiliteProportion: number
+    type: string,
+    imgUrl: string,
+    url: string,
+    description: string,
+    statistics: Array<object>,
+    conditions: string[],
+    recipe: object[],
+    setId: number
+    // dernierBrisage: string,
+    // coefficient: number,
+    // rentabiliteKamas: number,
+    // rentabiliteProportion: number
 }
