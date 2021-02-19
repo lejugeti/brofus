@@ -1,0 +1,20 @@
+export const   serveurs = [
+    'Merkator',
+    'Brumen',
+    'Pandore',
+    'Julith',
+    'Furye',
+    'Nidas',
+    'Ush',
+    'Meriana',
+    'Agride',
+    'Ilyzaelle',
+    'Jahash',
+    'Echo',
+    'Oto Mustam',
+    'Thanatena',
+    'Ombre',
+    'Crocabulia',
+    'Rubilax',
+    'Atcham'
+  ]

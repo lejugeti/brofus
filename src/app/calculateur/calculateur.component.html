@@ -1,1 +1,74 @@
-<p>calculateur works!</p>
+<style>
+    #calculateur-page {
+        display: flex;
+        align-items: stretch;
+        margin-top: 2em;
+    }
+    #calculateur-container{
+        display: flex;
+        flex-direction: column;
+    }
+    #presentation-item, #entete{
+        display: flex;
+    }
+    #ellipse-img{
+        border: solid 0.2em;
+        border-radius: 10em;
+        width: 6em;
+        height: 6em;
+    }
+    #infos-item{
+        display: flex;
+        flex-direction: column;
+    }
+    #nom-item{
+        font-size: 2em;
+    }
+    #colonne-prix{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<div id="calculateur-page" class="row">
+    <div id="backArrow-div" class="col-2">
+        <fa-icon [icon]="faArrowLeft" class="fa-3x" (click)="goBack()"></fa-icon>
+    </div>
+    <div id="calculateur-container" class="col-10">
+        <div id="entete">
+            <div id="presentation-item">
+                <div id="ellipse-img"></div>
+                <div id="infos-item">
+                    <div id="nom-item">{{item.name}}</div>
+                    <div id="infos-complementaires">{{item.type}} - Niveau {{item.level}}</div>
+                    <div id="logos-div">
+                        <fa-icon [icon]="faHeart"></fa-icon>
+                        <fa-icon [icon]="faHeart"></fa-icon>
+                    </div>
+                </div>
+            </div>
+            <div id="colonne-prix">
+                <mat-form-field appearance="outline">
+                    <mat-label>Prix du craft</mat-label>
+                    <input matInput placeholder="124000" [(ngModel)]="prixCraft">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Coefficient</mat-label>
+                    <input matInput placeholder="100 %" [(ngModel)]="coefficient"/>
+                </mat-form-field>
+            </div>
+            <div></div>
+        </div>
+        <div id="tableau-stats">
+            <mat-form-field appearance="outline">
+                <mat-label>Serveur</mat-label>
+                <mat-select [(ngModel)]="selectedServeur">
+                    <mat-option *ngFor="let serveur of serveurs" [value]="serveur">
+                        {{serveur}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    
+</div>

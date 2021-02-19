@@ -14,7 +14,7 @@ export class RechercheComponent implements OnInit {
   constructor(private itemsService: GetItemsService) {}
 
   ngOnInit(): void {
-    this.itemsService.getSingleEquipment(14000).subscribe(data => {
+    this.itemsService.getSingleEquipment(701).subscribe(data => {
       // console.log(data);
       this.equipements.push(data)
     });
