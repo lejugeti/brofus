@@ -20,6 +20,7 @@
     #infos-item{
         display: flex;
         flex-direction: column;
+        margin-left: 1em;
     }
     #nom-item{
         font-size: 2em;
@@ -28,15 +29,27 @@
         display: flex;
         flex-direction: column;
     }
+    #colonne-pui{
+        display: flex;
+        flex-direction: column;
+    }
+    #coef-input{
+        margin-top: -1.4em;
+    }
+    .table-input {
+        width: 6em;
+        margin-left: 0.3em;
+        border: solid gray 1px;
+    }
 </style>
 
-<div id="calculateur-page" class="row">
+<div id="calculateur-page">
     <div id="backArrow-div" class="col-2">
         <fa-icon [icon]="faArrowLeft" class="fa-3x" (click)="goBack()"></fa-icon>
     </div>
-    <div id="calculateur-container" class="col-10">
-        <div id="entete">
-            <div id="presentation-item">
+    <div id="calculateur-container" class="col-9">
+        <div id="entete" class="row">
+            <div id="presentation-item" class="col-3">
                 <div id="ellipse-img"></div>
                 <div id="infos-item">
                     <div id="nom-item">{{item.name}}</div>
@@ -47,17 +60,23 @@
                     </div>
                 </div>
             </div>
-            <div id="colonne-prix">
+            <div id="colonne-prix" class="col-4">
                 <mat-form-field appearance="outline">
                     <mat-label>Prix du craft</mat-label>
-                    <input matInput placeholder="124000" [(ngModel)]="prixCraft">
+                    <input matInput placeholder="124000 kamas" [(ngModel)]="prixCraft" pattern="[0-9]*">
+                    <mat-error *ngIf="numberInputControl.hasError('required')&&numberInputControl.hasError('pattern')"></mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Coefficient</mat-label>
-                    <input matInput placeholder="100 %" [(ngModel)]="coefficient"/>
+                <mat-form-field id="coef-input" appearance="outline">
+                    <mat-label>Coefficient (%)</mat-label>
+                    <input matInput placeholder="100 %" [(ngModel)]="coefficient" pattern="[0-9]*"/>
+                    <mat-error *ngIf="numberInputControl.hasError('required')&&numberInputControl.hasError('pattern')"></mat-error>
                 </mat-form-field>
             </div>
-            <div></div>
+            <div id="colonne-pui" class="col-4">
+                <div>Pui min : {{puiMin}}</div>
+                <div>Pui max : {{puiMax}}</div>
+                <div>Pui actuel : {{puiItem}}</div>
+            </div>
         </div>
         <div id="tableau-stats">
             <mat-form-field appearance="outline">
@@ -68,6 +87,50 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
+
+            <mat-table [dataSource]="infosTableau" class="mat-elevation-z8">
+                <ng-container matColumnDef="Statistique">
+                    <mat-header-cell *matHeaderCellDef>Statistique</mat-header-cell>
+                    <mat-cell *matCellDef="let stat">{{ stat.name }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Montant">
+                    <mat-header-cell *matHeaderCellDef>Montant</mat-header-cell>
+                    <mat-cell *matCellDef="let stat; let i = index">
+                        <input matInput type="number" [(ngModel)]="stat.montant" class="table-input form-control"/>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="QuantiteRunes">
+                    <mat-header-cell *matHeaderCellDef>Quantité focus</mat-header-cell>
+                    <mat-cell *matCellDef="let stat">{{ getQuantiteRunes(stat.montant, stat.pui) }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="PrixRune">
+                    <mat-header-cell *matHeaderCellDef>Prix unitaire rune</mat-header-cell>
+                    <mat-cell *matCellDef="let stat">
+                        <input matInput type="number" [(ngModel)]="stat.prixRune" class="table-input form-control"/>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="TotalGain">
+                    <mat-header-cell *matHeaderCellDef>Gain Total (kamas)</mat-header-cell>
+                    <mat-cell *matCellDef="let stat">{{ getGainTotal(stat.montant, stat.pui, stat.prixRune) }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Rentabilite">
+                    <mat-header-cell *matHeaderCellDef>Rentabilité</mat-header-cell>
+                    <mat-cell *matCellDef="let stat">{{ getRentabilite(stat.montant, stat.pui, stat.prixRune) }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="CoefNecessaire">
+                    <mat-header-cell *matHeaderCellDef>Coef pour être rentable</mat-header-cell>
+                    <mat-cell *matCellDef="let stat">{{ getCoefRentabilite(stat.montant, stat.pui, stat.prixRune) }}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
         </div>
     </div>
     
