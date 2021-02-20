@@ -1,0 +1,51 @@
+<style>
+    .table-input {
+        width: 6em;
+        margin-left: 0.3em;
+        border: solid gray 1px;
+    }
+</style>
+
+<mat-table [dataSource]="tableauStats" class="mat-elevation-z8">
+    <ng-container matColumnDef="Statistique">
+        <mat-header-cell *matHeaderCellDef>Statistique</mat-header-cell>
+        <mat-cell *matCellDef="let stat">{{ stat.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Montant">
+        <mat-header-cell *matHeaderCellDef>Montant</mat-header-cell>
+        <mat-cell *matCellDef="let stat; let i = index">
+            <input matInput type="number" [(ngModel)]="stat.montant" class="table-input form-control"/>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="QuantiteRunes">
+        <mat-header-cell *matHeaderCellDef>Quantité focus</mat-header-cell>
+        <mat-cell *matCellDef="let stat">{{ getQuantiteRunes(stat.montant, stat.pui) }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="PrixRune">
+        <mat-header-cell *matHeaderCellDef>Prix unitaire rune</mat-header-cell>
+        <mat-cell *matCellDef="let stat">
+            <input matInput type="number" [(ngModel)]="stat.prixRune" class="table-input form-control"/>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="TotalGain">
+        <mat-header-cell *matHeaderCellDef>Gain Total (kamas)</mat-header-cell>
+        <mat-cell *matCellDef="let stat">{{ getGainTotal(stat.montant, stat.pui, stat.prixRune) }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Rentabilite">
+        <mat-header-cell *matHeaderCellDef>Rentabilité</mat-header-cell>
+        <mat-cell *matCellDef="let stat">{{ getRentabilite(stat.montant, stat.pui, stat.prixRune) }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="CoefNecessaire">
+        <mat-header-cell *matHeaderCellDef>Coef pour être rentable</mat-header-cell>
+        <mat-cell *matCellDef="let stat">{{ getCoefRentabilite(stat.montant, stat.pui, stat.prixRune) }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

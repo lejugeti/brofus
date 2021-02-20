@@ -25,10 +25,6 @@ export class CalculateurItemService {
       recipe: [],
       setId:0
     };
-
-    // this.puiMin = 0;
-    // this.puiMax = 0;
-
   }
 
   init(receivedItem: Item){
@@ -54,7 +50,6 @@ export class CalculateurItemService {
   calculPuiMin() {
     let puiMin = 0;
     this.item.statistics.forEach(stat => {
-      
       const entries = Object.entries(stat)[0];
       const key = entries[0];
       const puiRune = poids[key];
@@ -69,14 +64,12 @@ export class CalculateurItemService {
   calculPuiMax() {
     let puiMax = 0;
     this.item.statistics.forEach(stat => {
-      
       const entries = Object.entries(stat)[0];
       const key = entries[0];
       const puiRune = poids[key];
-      const statMax = this.filterGivenStat(entries[1], 'min');
+      const statMax = this.filterGivenStat(entries[1], 'max');
       const puiStatmax = statMax * puiRune;
       puiMax += puiStatmax;
-      
     });
 
     return puiMax;

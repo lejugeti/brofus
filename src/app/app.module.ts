@@ -22,6 +22,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RechercheComponent } from './recherche/recherche.component';
 import { EquipementComponent } from './recherche/equipement/equipement.component';
 import { CalculateurComponent } from './calculateur/calculateur.component';
+import { TableauComponent } from './calculateur/tableau/tableau.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CalculateurComponent } from './calculateur/calculateur.component';
     RechercheComponent,
     FiltresComponent,
     EquipementComponent,
-    CalculateurComponent
+    CalculateurComponent,
+    TableauComponent
   ],
   imports: [
     BrowserModule,

@@ -18,16 +18,13 @@ import { serveurs } from '../services/serveurs'
 export class CalculateurComponent implements OnInit {
   
   item: Item;
-  infosTableau: any[] = [];
   serveurs = serveurs;
   prixCraft = 0;
   coefficient = 100;
   selectedServeur = '';
   puiMin = 0;
   puiMax = 0;
-  puiParStat: any[] = [];
   puiItem = 0;
-  error= true;
 
   // icons
   faArrowLeft = faArrowLeft;
@@ -39,8 +36,6 @@ export class CalculateurComponent implements OnInit {
     Validators.pattern('[1-9]*')
   ])
 
-  // columns for table
-  displayedColumns: string[] = ['Statistique', 'Montant', 'QuantiteRunes', 'PrixRune', 'TotalGain', 'Rentabilite', 'CoefNecessaire']
   
   constructor(private itemService: GetItemsService, 
     private route: ActivatedRoute, 
@@ -72,7 +67,7 @@ export class CalculateurComponent implements OnInit {
       this.puiMin = this.calculateur.calculPuiMin();
       this.puiMax = this.calculateur.calculPuiMax();
       this.puiItem = this.calculateur.calculPuiItem();
-      this.infosTableau = this.calculateur.initTableInfo();
+      // console.log(this.item);
     });
   }
 
@@ -80,19 +75,4 @@ export class CalculateurComponent implements OnInit {
     this.location.back();
   }
 
-  getQuantiteRunes(montantStat: number, puiStat: number) {
-    return this.calculateur.calculQuantiteRunes(montantStat, puiStat, this.puiMin, this.coefficient).toFixed(0);
-  }
-
-  getGainTotal(montantStat: number, puiStat: number, prixRune: number) {
-    return this.calculateur.calculGainTotal(montantStat, puiStat, this.puiMin, prixRune, this.coefficient).toFixed(0);
-  }
-
-  getRentabilite(montantStat: number, puiStat: number, prixRune: number) {
-    return this.calculateur.calculRentabilite(montantStat, puiStat, this.puiMin, this.prixCraft, prixRune, this.coefficient).toFixed(0);
-  }
-
-  getCoefRentabilite(montantStat: number, puiStat: number, prixRune: number) {
-    return this.calculateur.calculCoefRentabilite(montantStat, puiStat, this.puiMin, this.prixCraft, prixRune, this.coefficient).toFixed(2);
-  }
 }
