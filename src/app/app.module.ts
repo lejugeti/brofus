@@ -10,6 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -50,6 +51,7 @@ import { TableauComponent } from './calculateur/tableau/tableau.component';
     MatInputModule,
     MatDividerModule,
     MatTableModule,
+    MatIconModule,
     FontAwesomeModule,
   ],
   providers: [],
