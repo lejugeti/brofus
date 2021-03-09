@@ -23,13 +23,13 @@
 <div id="recherche-page">
     <app-filtres></app-filtres>
     <div id="recherche-div" class="col-8">
-        <mat-form-field id="searchBar" appearance="outline">
+        <mat-form-field  appearance="outline">
             <mat-label>Recherche d'équipement</mat-label>
-            <input matInput type="text" placeholder="Ex : Cape du piou bleu"/>
+            <input matInput id="searchBar" type="text" [(ngModel)]="recherche" placeholder="Ex : Cape du piou bleu"/>
         </mat-form-field>
 
         <div id="liste-equipements">
-            <div *ngFor="let item of equipements">
+            <div *ngFor="let item of itemsToShow">
                 <app-equipement [item]=item></app-equipement>
             </div>
         </div>

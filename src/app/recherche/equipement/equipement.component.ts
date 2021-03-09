@@ -37,7 +37,7 @@ export class EquipementComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    console.log(this.item);
+    // console.log(this.item);
 
   }
 
