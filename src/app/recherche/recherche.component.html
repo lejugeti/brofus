@@ -21,7 +21,10 @@
 </style>
 
 <div id="recherche-page">
-    <app-filtres></app-filtres>
+    <app-filtres 
+    (addTagEvent)="addTag($event)" 
+    (removeTagEvent)="removeTag($event)"
+    ></app-filtres>
     <div id="recherche-div" class="col-8">
         <mat-form-field  appearance="outline">
             <mat-label>Recherche d'équipement</mat-label>

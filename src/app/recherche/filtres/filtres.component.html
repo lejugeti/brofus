@@ -47,9 +47,9 @@
     <div class="filtre-section">
         <div class=" sous-titre">Level</div>
         <div id="level-container">
-            <input class=" form-control level-input" type="text" placeholder="Min"/>
+            <input class=" form-control level-input" type="text" placeholder="Min" maxlength="3"/>
             <div> - </div>
-            <input class=" form-control level-input" type="text" placeholder="Max"/>    
+            <input class=" form-control level-input" type="text" placeholder="Max" maxlength="3"/>    
         </div>
     </div>
 
@@ -58,7 +58,7 @@
     </div>
     <ul>
         <li *ngFor="let equipement of typeEquipement">
-            <mat-checkbox class="filtres-checkbox" color="primary">{{equipement.name}}</mat-checkbox>
+            <mat-checkbox class="filtres-checkbox" color="primary" [(ngModel)]="equipement.value" (ngModelChange)="handleTagCheck(equipement.value, equipement.name, 'type')">{{equipement.name}}</mat-checkbox>
         </li>
     </ul>
     <div class="sous-titre">
@@ -66,7 +66,7 @@
     </div>
     <ul>
         <li *ngFor="let stat of statistiques">
-            <mat-checkbox color="primary">{{stat.name}}</mat-checkbox>
+            <mat-checkbox color="primary" [(ngModel)]="stat.value" (ngModelChange)="handleTagCheck(stat.value, stat.name, 'stat')">{{stat.name}}</mat-checkbox>
         </li>
     </ul>
 </div>
