@@ -72,7 +72,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "brofus:build"
+            "browserTarget": "brofus:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
