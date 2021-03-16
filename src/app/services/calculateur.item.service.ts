@@ -1,5 +1,5 @@
 import { Injectable, Input } from '@angular/core';
-import { Item } from '../interfaces/item.interface';
+import { DofapiItem } from '../interfaces/item.interface';
 import { poids } from './statistiques.poids'
 import { IObject } from '../interfaces/object.interface';
 
@@ -8,7 +8,7 @@ import { IObject } from '../interfaces/object.interface';
 })
 export class CalculateurItemService {
   
-  item: Item;
+  item: DofapiItem;
   
   constructor() { 
     this.item = { 
@@ -27,7 +27,7 @@ export class CalculateurItemService {
     };
   }
 
-  init(receivedItem: Item){
+  init(receivedItem: DofapiItem){
     this.item = receivedItem;
   }
 

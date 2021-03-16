@@ -1,4 +1,6 @@
-export interface Item{
+import { IObject } from './object.interface'
+
+export interface DofapiItem{
     _id: number,
     ankamaId: number,
     name: string,
@@ -11,8 +13,15 @@ export interface Item{
     conditions: string[],
     recipe: object[],
     setId: number
-    // dernierBrisage: string,
-    // coefficient: number,
-    // rentabiliteKamas: number,
-    // rentabiliteProportion: number
+    
+}
+
+export interface Item{
+    id: number,
+    name: string,
+    level: number,
+    type: string,
+    imgUrl: string,
+    statistics: Array<IObject>,
+    
 }

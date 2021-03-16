@@ -3,12 +3,16 @@ import { ActivatedRoute } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { GetItemsService } from '../services/get-items.service';
+import { ItemService } from '../services/item.service';
 import { CalculateurItemService } from '../services/calculateur.item.service';
-import { Item } from '../interfaces/item.interface';
+import { DofapiItem } from '../interfaces/item.interface';
 import { IObject } from '../interfaces/object.interface';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { serveurs } from '../services/serveurs'
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calculateur',
@@ -16,8 +20,9 @@ import { serveurs } from '../services/serveurs'
   styleUrls: ['./calculateur.component.scss']
 })
 export class CalculateurComponent implements OnInit {
-  
-  item: Item;
+  itemCollection: AngularFirestoreCollection<DofapiItem>;
+  items: Observable<DofapiItem[]>;
+  item: DofapiItem;
   serveurs = serveurs;
   prixCraft = 0;
   coefficient = 100;
@@ -40,7 +45,9 @@ export class CalculateurComponent implements OnInit {
   constructor(private itemService: GetItemsService, 
     private route: ActivatedRoute, 
     private location: Location,
-    private calculateur: CalculateurItemService) {
+    private calculateur: CalculateurItemService,
+    private fireService: ItemService,
+    private afs: AngularFirestore) {
     this.item = { 
       _id: 0,
       ankamaId: 0,
@@ -56,6 +63,14 @@ export class CalculateurComponent implements OnInit {
       setId: 0
     };
 
+    this.itemCollection = this.afs.collection<DofapiItem>("items");
+    this.items = this.itemCollection.valueChanges();
+    
+    this.items.subscribe(res =>{
+      console.log(res)
+    })
+    
+    
    }
 
   ngOnInit(): void {
@@ -67,8 +82,10 @@ export class CalculateurComponent implements OnInit {
       this.puiMin = this.calculateur.calculPuiMin();
       this.puiMax = this.calculateur.calculPuiMax();
       this.puiItem = this.calculateur.calculPuiItem();
-      // console.log(this.item);
+
     });
+
+    
   }
 
   goBack() {

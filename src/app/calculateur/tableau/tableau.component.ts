@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { CalculateurItemService } from '../../services/calculateur.item.service'
-import { Item } from '../../interfaces/item.interface';
+import { DofapiItem } from '../../interfaces/item.interface';
 
 @Component({
   selector: 'app-tableau',
@@ -10,7 +10,7 @@ import { Item } from '../../interfaces/item.interface';
 })
 export class TableauComponent implements OnInit {
 
-  @Input() item: Item;
+  @Input() item: DofapiItem;
   @Input() puiMin: number;
   @Input() puiMax: number;
   @Input() coefficient: number;

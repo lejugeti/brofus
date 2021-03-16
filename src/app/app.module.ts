@@ -1,3 +1,6 @@
+//
+/// Modules
+//
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +16,12 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
+//
+/// COMPONENTS
+//
 import { AppComponent } from './app.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnexionComponent } from './connexion/connexion.component';
@@ -24,6 +32,12 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { EquipementComponent } from './recherche/equipement/equipement.component';
 import { CalculateurComponent } from './calculateur/calculateur.component';
 import { TableauComponent } from './calculateur/tableau/tableau.component';
+import { BddUpdaterComponent } from './bdd.updater/bdd.updater.component';
+
+//
+/// CONFIGS
+//
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -36,7 +50,8 @@ import { TableauComponent } from './calculateur/tableau/tableau.component';
     FiltresComponent,
     EquipementComponent,
     CalculateurComponent,
-    TableauComponent
+    TableauComponent,
+    BddUpdaterComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +68,8 @@ import { TableauComponent } from './calculateur/tableau/tableau.component';
     MatTableModule,
     MatIconModule,
     FontAwesomeModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

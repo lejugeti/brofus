@@ -5,7 +5,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HostListener } from '@angular/core'
 import { TagObject } from '../interfaces/tagObject.interface';
 import { Tags } from '../interfaces/tags.interface';
-import { Item } from '../interfaces/item.interface';
+import { DofapiItem } from '../interfaces/item.interface';
 
 @Component({
   selector: 'app-recherche',
@@ -15,8 +15,8 @@ import { Item } from '../interfaces/item.interface';
 export class RechercheComponent implements OnInit {
   
   recherche = '';
-  equipements: Array<Item> = [];
-  itemsToShow: Array<Item> = [];
+  equipements: Array<DofapiItem> = [];
+  itemsToShow: Array<DofapiItem> = [];
   tags: Tags = {types: [], stats: []};
 
   constructor(

@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
-import { Item } from '../interfaces/item.interface';
+import { DofapiItem } from '../interfaces/item.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,10 @@ export class GetItemsService {
   constructor(private http: HttpClient) {}
 
   getEquipments() {
-    return this.http.get<Item[]>(this.equipmentsUrl);
+    return this.http.get<DofapiItem[]>(this.equipmentsUrl);
   }
 
   getSingleEquipment(id: number) {
-    return this.http.get<Item>(this.equipmentsUrl + id);
+    return this.http.get<DofapiItem>(this.equipmentsUrl + id);
   }
 }
