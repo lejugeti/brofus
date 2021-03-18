@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { FormatItemService } from '../services/format.item.service';
+import { ItemSorterService } from '../services/item.sorter.service';
 import { GetItemsService } from '../services/get-items.service';
-import { DofapiItem } from '../interfaces/item.interface';
+import { DofapiItem, Item } from '../interfaces/item.interface';
 
 @Component({
   selector: 'app-bdd.updater',
@@ -11,18 +12,40 @@ import { DofapiItem } from '../interfaces/item.interface';
 })
 export class BddUpdaterComponent implements OnInit {
 
-  itemsToUpload: DofapiItem[] = [];
-    
+  itemsToUpload: Item[] = [];
+  itemCollection = this.afs.collection<Item>('items');
+  items = this.itemCollection.valueChanges();
+
   constructor( 
       private getItemService: GetItemsService,
-      private afs: AngularFirestore) {
-
-  }
+      private afs: AngularFirestore,
+      private itemFormater: FormatItemService,
+      private sorter: ItemSorterService) {}
 
   ngOnInit(){
-    this.getItemService.getSingleEquipment(701).subscribe(res => {
-      this.itemsToUpload.push(res);
-      console.log(res);
-    });
+    // this.getItemService.getEquipments().subscribe(items => {
+
+    //   const sortedItems = this.sorter.sortByAnkaIdAscending(items);
+
+    //   for(let i = 0; i< 5; i++){
+    //     let item = this.itemFormater.formatItem(sortedItems[i], i+1);
+    //     this.itemsToUpload.push(item);
+
+    //     this.itemCollection.add(item);
+    //   }
+    // });
+
+    // this.deleteAllItems();
   }
+
+  deleteAllItems() {
+
+    this.itemCollection.snapshotChanges().subscribe(snapshot => {
+      snapshot.forEach(item =>
+        this.itemCollection.doc(item.payload.doc.id).delete()
+      );
+    })
+  }
+
+  
 }

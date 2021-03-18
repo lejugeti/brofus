@@ -18,6 +18,7 @@ export interface DofapiItem{
 
 export interface Item{
     id: number,
+    ankamaId: number,
     name: string,
     level: number,
     type: string,
