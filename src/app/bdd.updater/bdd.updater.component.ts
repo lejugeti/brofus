@@ -12,9 +12,9 @@ import { DofapiItem, Item } from '../interfaces/item.interface';
 })
 export class BddUpdaterComponent implements OnInit {
 
-  itemsToUpload: Item[] = [];
   itemCollection = this.afs.collection<Item>('items');
-  items = this.itemCollection.valueChanges();
+  itemsToDelete: any[] = [];
+  progress = 0;
 
   constructor( 
       private getItemService: GetItemsService,
@@ -23,29 +23,48 @@ export class BddUpdaterComponent implements OnInit {
       private sorter: ItemSorterService) {}
 
   ngOnInit(){
-    // this.getItemService.getEquipments().subscribe(items => {
+  
 
-    //   const sortedItems = this.sorter.sortByAnkaIdAscending(items);
-
-    //   for(let i = 0; i< 5; i++){
-    //     let item = this.itemFormater.formatItem(sortedItems[i], i+1);
-    //     this.itemsToUpload.push(item);
-
-    //     this.itemCollection.add(item);
-    //   }
+    // this.itemCollection.valueChanges().subscribe(items => {
+    //   console.log(`Il y a actuellement ${items.length} items dans la bdd`);
     // });
 
-    // this.deleteAllItems();
+    const test = this.afs.collection('items', ref => ref.where('id', '==', 1).where('type', '==', 'Amulette'));
+    test.valueChanges().subscribe(items => {
+      console.log(items);
+    });
   }
 
-  deleteAllItems() {
+  updateItems(){
 
-    this.itemCollection.snapshotChanges().subscribe(snapshot => {
-      snapshot.forEach(item =>
-        this.itemCollection.doc(item.payload.doc.id).delete()
-      );
-    })
+    
+    this.getItemService.getEquipments().subscribe(items => {
+
+      const sortedItems = this.sorter.sortByAnkaIdAscending(items);
+
+      for(let i = 0; i < sortedItems.length; i++){
+        let item = sortedItems[i];
+        try{
+          if(item.statistics != null){
+            let newItem = this.itemFormater.formatItem(item, i+1);
+            this.itemCollection.add(newItem);
+            this.progress = 100 * (i+1)/sortedItems.length;
+          }
+          
+        }
+        catch(error){
+          console.log(`Il y a eu une erreur : ${error} associée à l'item\n ${item}`);
+          break;
+        }
+        
+      }
+    });
   }
 
   
+
+  
 }
+
+  
+

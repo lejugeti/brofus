@@ -5,7 +5,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HostListener } from '@angular/core'
 import { TagObject } from '../interfaces/tagObject.interface';
 import { Tags } from '../interfaces/tags.interface';
-import { DofapiItem } from '../interfaces/item.interface';
+import { DofapiItem, Item } from '../interfaces/item.interface';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-recherche',
@@ -16,26 +17,31 @@ export class RechercheComponent implements OnInit {
   
   recherche = '';
   equipements: Array<DofapiItem> = [];
-  itemsToShow: Array<DofapiItem> = [];
+  itemsToShow: Array<Item> = [];
   tags: Tags = {types: [], stats: []};
 
   constructor(
     private itemsService: GetItemsService,
-    private filterService: FilterService) {}
+    private filterService: FilterService,
+    private afs: AngularFirestore) {}
 
   ngOnInit(): void {
-    this.itemsService.getSingleEquipment(701).subscribe(data => {
-      // console.log(data);
-      this.equipements.push(data);
-    });
+    // this.itemsService.getSingleEquipment(701).subscribe(data => {
+    //   // console.log(data);
+    //   this.equipements.push(data);
+    // });
 
     // this.itemsService.getEquipments().subscribe(data => {
     //   data.forEach(item => {
     //     this.equipements.push(item);
     //   });
     // });
+    // this.itemsToShow = this.equipements;
 
-    this.itemsToShow = this.equipements;
+    this.afs.collection<Item>('items').valueChanges().subscribe(items =>{
+      this.itemsToShow = items;
+    })
+    
 
   }
   

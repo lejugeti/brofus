@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DofapiItem } from '../../interfaces/item.interface';
+import { DofapiItem, Item } from '../../interfaces/item.interface';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -11,28 +11,23 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export class EquipementComponent implements OnInit {
 
-  @Input() item: DofapiItem;
+  @Input() item: Item;
   itemId: number;
   faHeart = faHeart;
   imgUrl: string;
 
   constructor() { 
     this.item = { 
-      _id: 0,
+      id: 0,
       ankamaId: 0,
       name: '', 
       level: 0, 
       type: '',
       imgUrl: '',
-      url: '',
-      description: '',
       statistics: [],
-      conditions: [],
-      recipe: [],
-      setId:0
     };
 
-    this.itemId = this.item._id;
+    this.itemId = this.item.id;
     this.imgUrl = '';
   }
   
