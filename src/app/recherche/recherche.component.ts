@@ -38,7 +38,7 @@ export class RechercheComponent implements OnInit {
     // });
     // this.itemsToShow = this.equipements;
 
-    this.afs.collection<Item>('items').valueChanges().subscribe(items =>{
+    this.afs.collection<Item>('items', ref=> ref.where('id', "==", 1)).valueChanges().subscribe(items =>{
       this.itemsToShow = items;
     })
     
