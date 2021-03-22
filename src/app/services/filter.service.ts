@@ -9,8 +9,8 @@ export class FilterService {
 
   constructor() { }
 
-  searchAndFilter(recherche: string, equipements: Array<any>, tags: Tags) {
-    let filteredItems: Item[] = this.filterItems(tags, equipements);
+  searchAndFilter(recherche: string, tags: Tags, levelMin: number, levelMax: number, equipements: Array<any>) {
+    let filteredItems: Item[] = this.filterItems(tags, levelMin, levelMax, equipements);
     // console.log(filteredItems);
     // console.log(`Recherche : ${recherche}`);
 
@@ -26,17 +26,19 @@ export class FilterService {
   }
   
   // Filtre les items en fonctions des tags choisis s'il y en a
-  filterItems(tags: Tags, itemList: Array<Item>) {
+  filterItems(tags: Tags, levelMin: number, levelMax: number, itemList: Array<Item>) {
 
+    let lvlFiltered = this.filterByLevel(levelMin, levelMax, itemList);
+    console.log(lvlFiltered);
     if(tags.stats.length !== 0 || tags.types.length !== 0){
-      let newItemList = this.filterByTypes(tags.types, itemList);
-      newItemList = this.filterByStats(tags.stats, newItemList);
+      let typeFiltered = this.filterByTypes(tags.types, lvlFiltered);
+      let newItemList = this.filterByStats(tags.stats, typeFiltered);
       // console.log(newItemList);
 
       return newItemList;
     }
     else{
-      return itemList;
+      return lvlFiltered;
     }
   }
 
@@ -61,8 +63,13 @@ export class FilterService {
   }
 
   // Filtre les items en fonction des tags de niveau
-  private filterByLevel(typeTags: Array<string>, itemList: Array<Item>){
-    
+  private filterByLevel(levelMin: number, levelMax: number, itemList: Array<Item>){
+    if(levelMin===0 && levelMax===200){
+      return itemList;
+    }
+    else{
+      return itemList.filter(item => item.level >= levelMin && item.level <= levelMax);
+    }
   }
 
   // Extrait les noms des statistiques d'un Item donnné

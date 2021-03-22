@@ -41,7 +41,7 @@ export class RechercheComponent implements OnInit {
     // });
     // this.itemsToShow = this.equipements;
 
-    this.afs.collection<Item>('items', ref=> ref.where('level', "<", 200).orderBy("level", "desc").limit(5))
+    this.afs.collection<Item>('items', ref=> ref.where('level', "<", 180).orderBy("level", "desc").limit(100))
       .valueChanges().subscribe(items =>{
       this.itemsToShow = items;
       this.equipements = items;
@@ -60,7 +60,7 @@ export class RechercheComponent implements OnInit {
     const key = event.key;
 
     if(key === "Enter"){
-      this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.equipements, this.tags);
+      this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
     }
   }
   
@@ -72,7 +72,7 @@ export class RechercheComponent implements OnInit {
       this.tags.stats.push(tag.name);
     }
     console.log(this.tags.stats);
-    this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.equipements, this.tags);
+    this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
   }
 
   removeTag(tag: TagObject) {
@@ -84,12 +84,14 @@ export class RechercheComponent implements OnInit {
     }
 
     console.log(this.tags.stats);
-    this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.equipements, this.tags);
+    this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
   }
 
   changeLevelFilter(levelValues: ILevelFilter){
     this.levelMin = levelValues.min;
     this.levelMax = levelValues.max;
+    this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
+    
     console.log(`Min : ${this.levelMin} \nMin : ${this.levelMax}`);
   }
 }
