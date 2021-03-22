@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { CalculateurItemService } from '../../services/calculateur.item.service'
-import { DofapiItem } from '../../interfaces/item.interface';
+import { Item } from '../../interfaces/item.interface';
 
 @Component({
   selector: 'app-tableau',
@@ -10,7 +10,7 @@ import { DofapiItem } from '../../interfaces/item.interface';
 })
 export class TableauComponent implements OnInit {
 
-  @Input() item: DofapiItem;
+  @Input() item: Item;
   @Input() puiMin: number;
   @Input() puiMax: number;
   @Input() coefficient: number;
@@ -22,21 +22,16 @@ export class TableauComponent implements OnInit {
 
   constructor(
     private calculateur: CalculateurItemService,
-    private iconRegister: MatIconRegistry
-    ) { 
-    this.item = { 
-      _id: 0,
+    private iconRegister: MatIconRegistry){ 
+    
+      this.item = { 
+      id: 0,
       ankamaId: 0,
       name: '', 
       level: 0, 
       type: '',
       imgUrl: '',
-      url: '',
-      description: '',
       statistics: [],
-      conditions: [],
-      recipe: [],
-      setId: 0
     };
     this.puiMin = 0;
     this.puiMax = 0;
@@ -54,6 +49,7 @@ export class TableauComponent implements OnInit {
     if(changes.item != null){
       this.item = changes.item.currentValue;
       this.tableauStats = this.calculateur.initTableInfo();
+      console.log(this.tableauStats);
     }
     if(changes.puiMin != null){
       this.puiMin = changes.puiMin.currentValue;

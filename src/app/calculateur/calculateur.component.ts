@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { GetItemsService } from '../services/get-items.service';
 import { ItemService } from '../services/item.service';
 import { CalculateurItemService } from '../services/calculateur.item.service';
-import { DofapiItem } from '../interfaces/item.interface';
+import { DofapiItem, Item } from '../interfaces/item.interface';
 import { IObject } from '../interfaces/object.interface';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -20,9 +20,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./calculateur.component.scss']
 })
 export class CalculateurComponent implements OnInit {
-  itemCollection: AngularFirestoreCollection<DofapiItem>;
-  items: Observable<DofapiItem[]>;
-  item: DofapiItem;
+  itemCollection: AngularFirestoreCollection<Item>;
+  item: Item;
   serveurs = serveurs;
   prixCraft = 0;
   coefficient = 100;
@@ -48,42 +47,42 @@ export class CalculateurComponent implements OnInit {
     private calculateur: CalculateurItemService,
     private fireService: ItemService,
     private afs: AngularFirestore) {
-    this.item = { 
-      _id: 0,
+    
+      this.item = { 
+      id: 0,
       ankamaId: 0,
       name: '', 
       level: 0, 
       type: '',
       imgUrl: '',
-      url: '',
-      description: '',
       statistics: [],
-      conditions: [],
-      recipe: [],
-      setId: 0
-    };
+      };
 
-    this.itemCollection = this.afs.collection<DofapiItem>("items");
-    this.items = this.itemCollection.valueChanges();
-    
-    this.items.subscribe(res =>{
-      console.log(res)
-    })
-    
-    
+      const routeParams = this.route.snapshot.paramMap;
+      const itemId: number = Number(routeParams.get('itemId'));
+      this.itemCollection = this.afs.collection<Item>("items", ref => ref.where("id", "==", itemId));
+      this.itemCollection.valueChanges().subscribe(res => {
+        this.item = res[0];
+        this.calculateur.init(this.item);
+        this.puiMin = this.calculateur.calculPuiMin();
+        this.puiMax = this.calculateur.calculPuiMax();
+        this.puiItem = this.calculateur.calculPuiItem();
+        
+        // console.log(this.item);
+      });
    }
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
     const itemId = Number(routeParams.get('itemId'));
-    this.itemService.getSingleEquipment(itemId).subscribe(res => {
-      this.item = res;
-      this.calculateur.init(this.item);
-      this.puiMin = this.calculateur.calculPuiMin();
-      this.puiMax = this.calculateur.calculPuiMax();
-      this.puiItem = this.calculateur.calculPuiItem();
+    // this.itemService.getSingleEquipment(itemId).subscribe(res => {
+    //   this.item = res;
+    //   this.calculateur.init(this.item);
+    //   this.puiMin = this.calculateur.calculPuiMin();
+    //   this.puiMax = this.calculateur.calculPuiMax();
+    //   this.puiItem = this.calculateur.calculPuiItem();
 
-    });
+    // });
 
     
   }
