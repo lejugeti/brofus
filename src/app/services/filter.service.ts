@@ -9,31 +9,38 @@ export class FilterService {
 
   constructor() { }
 
-  search(recherche: string, equipements: Array<any>, tags: Tags) {
+  searchAndFilter(recherche: string, equipements: Array<any>, tags: Tags) {
+    let filteredItems: Item[] = this.filterItems(tags, equipements);
+    // console.log(filteredItems);
+    // console.log(`Recherche : ${recherche}`);
+
     if(recherche.length != 0){
-      const reg = new RegExp(recherche.toLowerCase());
-      const newItemsToShow: Array<any> = [];
+      const reg = new RegExp(recherche.toLowerCase());   
+      let newItemsToShow = filteredItems.filter(item => reg.test(item.name.toLowerCase()));
   
-      equipements.forEach(item => {
-        if(reg.test(item.name.toLowerCase())){
-          newItemsToShow.push(item);
-        }
-      })
-  
-      return this.filterItems(tags, newItemsToShow);
+      return newItemsToShow;
     }
     else{
-      return equipements;
+      return filteredItems;
     }
-    
   }
   
+  // Filtre les items en fonctions des tags choisis s'il y en a
   filterItems(tags: Tags, itemList: Array<Item>) {
-    let newItemList = this.filterByTypes(tags.types, itemList);
-    console.log(newItemList);
 
-    return newItemList;
+    if(tags.stats.length !== 0 || tags.types.length !== 0){
+      let newItemList = this.filterByTypes(tags.types, itemList);
+      newItemList = this.filterByStats(tags.stats, newItemList);
+      // console.log(newItemList);
+
+      return newItemList;
+    }
+    else{
+      return itemList;
+    }
   }
+
+  // Filtre les items en fonction de l'ensemble des types d'item sélectionnés
   private filterByTypes(typeTags: Array<string>, itemList: Array<Item>){
     if(typeTags.length != 0){
       return itemList.filter(item => typeTags.includes(item.type))
@@ -42,12 +49,23 @@ export class FilterService {
       return itemList;
     }
   }
-  private filterByStats(statTags: Array<string>, itemList: Array<Item>){
 
+  // Filtre les items en fonction des tags de statistiques
+  private filterByStats(statTags: Array<string>, itemList: Array<Item>){
+    if(statTags.length != 0){
+      return itemList.filter(item => this.checkStatTags(statTags, this.extractStats(item)));
+    }
+    else{
+      return itemList;
+    }
   }
+
+  // Filtre les items en fonction des tags de niveau
   private filterByLevel(typeTags: Array<string>, itemList: Array<Item>){
     
   }
+
+  // Extrait les noms des statistiques d'un Item donnné
   extractStats(item: Item) {
     let stats: Array<string> = [];
 
@@ -57,5 +75,16 @@ export class FilterService {
     })
 
     return stats;
+  }
+
+  checkStatTags(statTags: string[], stats: string[]){
+    let toAdd = false;
+    stats.forEach(stat => {
+      if(statTags.includes(stat)){
+        toAdd = true;
+      }
+    });
+
+    return toAdd;
   }
 }

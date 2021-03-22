@@ -29,10 +29,10 @@ export class BddUpdaterComponent implements OnInit {
     //   console.log(`Il y a actuellement ${items.length} items dans la bdd`);
     // });
 
-    const test = this.afs.collection('items', ref => ref.where('id', '==', 1).where('type', '==', 'Amulette'));
-    test.valueChanges().subscribe(items => {
-      console.log(items);
-    });
+    // const test = this.afs.collection('items', ref => ref.where('id', '==', 1).where('type', '==', 'Amulette'));
+    // test.valueChanges().subscribe(items => {
+    //   console.log(items);
+    // });
   }
 
   updateItems(){

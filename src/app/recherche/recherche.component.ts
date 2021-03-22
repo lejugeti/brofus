@@ -4,7 +4,7 @@ import { FilterService } from '../services/filter.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HostListener } from '@angular/core'
 import { TagObject } from '../interfaces/tagObject.interface';
-import { Tags } from '../interfaces/tags.interface';
+import { ITags, Tags } from '../interfaces/tags.interface';
 import { DofapiItem, Item } from '../interfaces/item.interface';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
@@ -16,9 +16,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 export class RechercheComponent implements OnInit {
   
   recherche = '';
-  equipements: Array<DofapiItem> = [];
+  equipements: Array<Item> = [];
   itemsToShow: Array<Item> = [];
-  tags: Tags = {types: [], stats: []};
+  tags: Tags = new Tags([], []);
 
   constructor(
     private itemsService: GetItemsService,
@@ -38,22 +38,26 @@ export class RechercheComponent implements OnInit {
     // });
     // this.itemsToShow = this.equipements;
 
-    // this.afs.collection<Item>('items', ref=> ref.where('id', "==", 1)).valueChanges().subscribe(items =>{
-    //   this.itemsToShow = items;
-    // })
+    this.afs.collection<Item>('items', ref=> ref.where('level', "<", 200).orderBy("level", "desc").limit(5))
+      .valueChanges().subscribe(items =>{
+      this.itemsToShow = items;
+      this.equipements = items;
+      // console.log(this.itemsToShow[0]);
+      // console.log(this.filterService.extractStats(this.itemsToShow[0]));
+      // console.log(this.filterService.checkStatTags(["% Résistance Terre"], this.filterService.extractStats(this.itemsToShow[0])));
+
+    })
     
     
   }
   
   @HostListener('document:keydown', ['$event'])
   searchHandler(event: KeyboardEvent) {
-    // console.log(document.activeElement?.id);
-
     const focusedElement = document.activeElement?.id;
     const key = event.key;
 
     if(key === "Enter"){
-      this.itemsToShow = this.filterService.search(this.recherche, this.equipements, this.tags);
+      this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.equipements, this.tags);
     }
   }
   
@@ -64,6 +68,8 @@ export class RechercheComponent implements OnInit {
     else if(tag.type === 'stat'){
       this.tags.stats.push(tag.name);
     }
+    console.log(this.tags.stats);
+    this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.equipements, this.tags);
   }
 
   removeTag(tag: TagObject) {
@@ -73,6 +79,9 @@ export class RechercheComponent implements OnInit {
     else if(tag.type === 'stat'){
       this.tags.stats = this.tags.stats.filter(stat => stat !== tag.name);
     }
+
+    console.log(this.tags.stats);
+    this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.equipements, this.tags);
   }
 }
 
