@@ -26,7 +26,7 @@
         align-items: center;
         margin-bottom: 1em;
     }
-    .level-input{
+    .level-select{
         width: 3.5em;
         margin-left: 1em;
         margin-right: 1em;
@@ -47,10 +47,21 @@
     <div class="filtre-section">
         <div class=" sous-titre">Level</div>
         <div id="level-container">
-            <input class=" form-control level-input" type="text" placeholder="Min" maxlength="3"/>
+            <mat-form-field class="level-select">
+                <mat-select [(ngModel)]="levelValues.min" (ngModelChange)="handleLevelChange()">
+                    <mat-option *ngFor="let level of levels" [value]="level.value">
+                        {{level.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <div> - </div>
-            <input class=" form-control level-input" type="text" placeholder="Max" maxlength="3"/>    
-        </div>
+            <mat-form-field class="level-select">
+                <mat-select [(ngModel)]="levelValues.max" (ngModelChange)="handleLevelChange()">
+                    <mat-option *ngFor="let level of levels" [value]="level.value">
+                        {{level.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>        </div>
     </div>
 
     <div class="sous-titre">

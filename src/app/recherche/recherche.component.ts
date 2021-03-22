@@ -5,6 +5,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { HostListener } from '@angular/core'
 import { TagObject } from '../interfaces/tagObject.interface';
 import { ITags, Tags } from '../interfaces/tags.interface';
+import { ILevelFilter } from '../interfaces/level.filter.interface';
 import { DofapiItem, Item } from '../interfaces/item.interface';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
@@ -19,6 +20,8 @@ export class RechercheComponent implements OnInit {
   equipements: Array<Item> = [];
   itemsToShow: Array<Item> = [];
   tags: Tags = new Tags([], []);
+  levelMin: number = 0;
+  levelMax: number = 200;
 
   constructor(
     private itemsService: GetItemsService,
@@ -82,6 +85,12 @@ export class RechercheComponent implements OnInit {
 
     console.log(this.tags.stats);
     this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.equipements, this.tags);
+  }
+
+  changeLevelFilter(levelValues: ILevelFilter){
+    this.levelMin = levelValues.min;
+    this.levelMax = levelValues.max;
+    console.log(`Min : ${this.levelMin} \nMin : ${this.levelMax}`);
   }
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { TagObject } from '../../interfaces/tagObject.interface';
+import { ILevelFilter } from '../../interfaces/level.filter.interface';
 
 @Component({
   selector: 'app-filtres',
@@ -11,12 +12,28 @@ export class FiltresComponent implements OnInit {
 
   @Output() addTagEvent= new EventEmitter<TagObject>();
   @Output() removeTagEvent = new EventEmitter<TagObject>();
+  @Output() changeLvlEvent = new EventEmitter<ILevelFilter>();
+
+  levelValues: ILevelFilter = {min: 0, max: 200};
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  levels = [
+    {name: "0", value: 0},
+    {name: "20", value: 20},
+    {name: "40", value: 40},
+    {name: "60", value: 60},
+    {name: "80", value: 80},
+    {name: "100", value: 100},
+    {name: "120", value: 120},
+    {name: "140", value: 140},
+    {name: "160", value: 160},
+    {name: "180", value: 180},
+    {name: "200", value: 200}
+  ];
 
   typeEquipement = [
     {name: "Cape", value: false},
@@ -34,7 +51,7 @@ export class FiltresComponent implements OnInit {
     {name: "Faux", value: false},
     {name: "Pelle", value: false},
     {name: "Pioche", value: false}
-  ]
+  ];
   
   statistiques = [
     {name: "PA", value: false},
@@ -74,7 +91,7 @@ export class FiltresComponent implements OnInit {
     {name: "Retrait PM", value: false},
     {name: "Esquive PA", value: false},
     {name: "Esquive PM", value: false},
-  ]
+  ];
 
   handleTagCheck(checked: boolean, tag: string, type: string) {
     if(checked){
@@ -83,5 +100,10 @@ export class FiltresComponent implements OnInit {
     else{
       this.removeTagEvent.emit({name: tag, type: type});
     }
+  }
+
+  handleLevelChange() {
+    // console.log("change");
+    this.changeLvlEvent.emit(this.levelValues);
   }
 }
