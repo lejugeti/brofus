@@ -12,8 +12,11 @@ export class InscriptionComponent implements OnInit {
   login: string = '';
   email: string = '';
   password: string = '';
-  emailValidator = this.validatorService.validators.email;
-  testValidator = this.validatorService.validators.email;
+
+  loginControl = this.validatorService.validators.login;
+  emailControl = this.validatorService.validators.email;
+  passwordControl = this.validatorService.validators.password;
+  confirmPasswordControl = this.validatorService.validators.confirmPassword;
 
   constructor(
     private auth: AuthService,
@@ -33,6 +36,30 @@ export class InscriptionComponent implements OnInit {
 
   private checkPassword() {
     
+  }
+
+  getEmailErrorMessage() {
+    if(this.emailControl.hasError('required')){
+      return 'Vous devez rentrer un email';
+    }
+    else if(this.emailControl.hasError('email')){
+      return 'Votre email n\' est pas correct';
+    }
+    else{
+      return 'Votre email est incorrect';
+    }
+  }
+
+  getMdpErrorMessage() {
+    if(this.passwordControl.hasError('required')){
+      return 'Vous devez rentrer un email';
+    }
+    else if(this.passwordControl.hasError('email')){
+      return 'Votre email n\' est pas correct';
+    }
+    else{
+      return 'Votre email est incorrect';
+    }
   }
 
   // Validator pour la confirmation du mot de passe
