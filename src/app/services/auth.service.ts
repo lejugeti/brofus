@@ -16,8 +16,15 @@ export class AuthService {
     
   }
 
-  signInEmailPassword(email: string, password: string) {
-    // this.auth.
+  signUpEmailPassword(email: string, password: string) {
+    this.auth.createUserWithEmailAndPassword(email, password)
+    .then(res => {
+      this.userData = res.user;
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      this.router.navigate(['/recherche']);
+      // console.log(this.userData);
+    })
+    .catch(error => alert(error));
   }
 
   loginEmailPassword(email: string, password: string){

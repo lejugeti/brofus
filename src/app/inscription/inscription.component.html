@@ -43,18 +43,19 @@
         </div>
         <div class="form-group">
             <label for="email" class="form-label">Email</label>
-            <input type="text" id="email" class="inscription-input form-control">    
+            <input type="text" id="email" [(ngModel)]="email" name="email" class="inscription-input form-control">    
         </div>
         <div class="form-group">
             <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" id="password" class="inscription-input form-control">
+            <input type="password" id="password" [(ngModel)]="password" name="password" class="inscription-input form-control">
         </div>
         <div class="form-group">
             <label for="confirm-password" class="form-label">Confirmez votre mot de passe</label>
             <input type="password" id="confirm-password" class="inscription-input form-control">
         </div>
            
-        <button id="btn-submit" class="btn btn-success form-group">Valider mon inscription</button>
+        <button id="btn-submit" class="btn btn-success form-group" (click)="handleSigningUp(email, password)">Valider mon inscription</button>
+        <button id="btn-alert" class="btn btn-success form-group" (click)="handleLogout()">Logout</button>
 
     </form>
 
