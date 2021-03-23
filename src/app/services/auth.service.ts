@@ -43,4 +43,6 @@ export class AuthService {
     this.auth.signOut();
     alert('Vous avez été déconnecté !');
   }
+
+  
 }
