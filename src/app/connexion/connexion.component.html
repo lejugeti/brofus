@@ -40,15 +40,16 @@
     <form class=form-connexion>
         <div class="form-group">
             <label for="login" class="form-label">Login</label>
-            <input type="text" id="login" class="connexion-input form-control">    
+            <input type="text" id="email" name="email" [(ngModel)]="email" class="connexion-input form-control">    
         </div>
         <div class="form-group">
             <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" id="password" class="connexion-input form-control">
+            <input type="password" id="password" name="password" [(ngModel)]="password" class="connexion-input form-control">
             <a id="forgotten-password">Mot de passe oublié ?</a>    
         </div>
            
-        <button id="btn-submit" class="btn btn-success form-group">Connexion</button>
+        <button id="btn-submit" class="btn btn-success form-group" (click)="handleLogin(email, password)">Connexion</button>
+        <!-- <button id="btn-alert" class="btn btn-success form-group" (click)="handleLogout()">Logout</button> -->
 
     </form>
 </div>

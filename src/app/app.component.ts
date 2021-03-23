@@ -13,6 +13,7 @@ export class AppComponent {
   public constructor(private titleService: Title, private router: Router){
     this.titleService.setTitle("Brofus");
     // this.router.navigate(['/connexion']);
+    // console.log(localStorage.getItem("user"));
   };
   
   
