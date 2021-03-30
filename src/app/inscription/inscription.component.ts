@@ -61,12 +61,4 @@ export class InscriptionComponent implements OnInit {
       return 'Votre email est incorrect';
     }
   }
-
-  // Validator pour la confirmation du mot de passe
-  private confirmPasswordValidator(reg: RegExp) {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const match = reg.test(control.value);
-      return match ? null : {badPassword: {value: control.value}};
-    }
-  }
 }

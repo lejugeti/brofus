@@ -57,7 +57,7 @@
                 matInput 
                 id="email" 
                 placeholder="pat@example.com" 
-                [formControl]="validatorService.validators.email" 
+                [formControl]="emailControl" 
                 class="inscription-input"
                 required>
             <mat-error *ngIf="emailControl.invalid">{{getEmailErrorMessage()}}</mat-error>
@@ -75,7 +75,7 @@
             [formControl]="passwordControl" 
             class="inscription-input"
             required>
-            <mat-error *ngIf="emailControl.invalid">{{getEmailErrorMessage()}}</mat-error>
+            <mat-error *ngIf="passwordControl.hasError('forbiddenName')">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>
         <div class="form-group">
             <label for="password" class="form-label">Mot de passe</label>
