@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ValidatorService } from '../services/validator.service';
 
@@ -18,6 +18,8 @@ export class InscriptionComponent implements OnInit {
   passwordControl = this.validatorService.validators.password;
   confirmPasswordControl = this.validatorService.validators.confirmPassword;
 
+  confirmPasswordError: any = null;
+
   constructor(
     private auth: AuthService,
     public validatorService: ValidatorService) { }
@@ -34,7 +36,7 @@ export class InscriptionComponent implements OnInit {
     this.auth.logout();
   }
 
-  private checkPassword() {
+  checkPassword() {
     
   }
 
@@ -62,11 +64,16 @@ export class InscriptionComponent implements OnInit {
     }
   }
 
-  // Validator pour la confirmation du mot de passe
-  private confirmPasswordValidator(reg: RegExp) {
-    return (control: AbstractControl): {[key: string]: any} | null => {
-      const match = reg.test(control.value);
-      return match ? null : {badPassword: {value: control.value}};
+  getConfirmMdpErrorMessage() {
+    if(this.passwordControl.hasError('required')){
+      return 'Vous devez confirmez votre mot de passe';
+    }
+    else if(this.passwordControl.hasError('tooShortPassword')){
+      return 'Votre 2e mot de passe est incorrect';
+    }
+    else{
+      return 'Votre deuxième mot de passe est incorrect';
     }
   }
+
 }
