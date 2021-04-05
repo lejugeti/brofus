@@ -77,14 +77,18 @@
             required>
             <mat-error *ngIf="passwordControl.hasError('forbiddenName')">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>
-        <div class="form-group">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" id="password" [(ngModel)]="password" name="password" class="inscription-input form-control">
-        </div>
-        <div class="form-group">
-            <label for="confirm-password" class="form-label">Confirmez votre mot de passe</label>
-            <input type="password" id="confirm-password" class="inscription-input form-control">
-        </div>
+        <mat-form-field appearance="outline">
+            <mat-label class="form-label">Confirm Password</mat-label>
+            <input 
+                matInput 
+                id="confirmPassword" 
+                placeholder="Confirm Password" 
+                [formControl]="confirmPasswordControl"
+                (input)="checkPassword()"
+                class="inscription-input"
+                required>
+            <mat-error *ngIf="confirmPasswordControl.hasError('tooShortPassword')">{{getEmailErrorMessage()}}</mat-error>
+        </mat-form-field>
            
         <button id="btn-submit" class="btn btn-success form-group" (click)="handleSigningUp(email, password)">Valider mon inscription</button>
         <button id="btn-alert" class="btn btn-success form-group" (click)="handleLogout()">Logout</button>
