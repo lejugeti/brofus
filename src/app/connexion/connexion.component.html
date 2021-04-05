@@ -38,18 +38,32 @@
 
 <div class="container">
     <form class=form-connexion>
-        <div class="form-group">
-            <label for="login" class="form-label">Login</label>
-            <input type="text" id="email" name="email" [(ngModel)]="email" class="connexion-input form-control">    
-        </div>
-        <div class="form-group">
-            <label for="password" class="form-label">Mot de passe</label>
-            <input type="password" id="password" name="password" [(ngModel)]="password" class="connexion-input form-control">
-            <a id="forgotten-password">Mot de passe oublié ?</a>    
-        </div>
+        <mat-form-field appearance="outline" class="connexion-input">
+            <mat-label class="form-label">Email</mat-label>
+            <input 
+            matInput 
+            id="email" 
+            placeholder="Email" 
+            [formControl]="emailControl" 
+            type="email"
+            required>
+            <mat-error *ngIf="emailControl.invalid">{{getMdpErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="connexion-input">
+            <mat-label class="form-label">Password</mat-label>
+            <input 
+            matInput 
+            id="password" 
+            placeholder="Password" 
+            [formControl]="passwordControl" 
+            class="inscription-input"
+            type="password"
+            required>
+            <mat-error *ngIf="passwordControl.invalid">{{getMdpErrorMessage()}}</mat-error>
+        </mat-form-field>
            
-        <button id="btn-submit" class="btn btn-success form-group" (click)="handleLogin(email, password)">Connexion</button>
-        <!-- <button id="btn-alert" class="btn btn-success form-group" (click)="handleLogout()">Logout</button> -->
+        <button id="btn-submit" class="btn btn-success form-group" (click)="handleLogin(emailControl.value, passwordControl.value)">Connexion</button>
+        <button id="btn-alert" class="btn btn-success form-group" (click)="handleLogout()">Logout</button>
 
     </form>
 </div>

@@ -28,7 +28,7 @@ export class InscriptionComponent implements OnInit {
   }
 
   handleSigningUp(email:string, password: string) {
-    this.auth.signUpEmailPassword(email, password);
+    this.auth.signUpEmailPassword(this.emailControl.value, this.passwordControl.value);
     console.log("inscription");
   }
 
@@ -54,13 +54,13 @@ export class InscriptionComponent implements OnInit {
 
   getMdpErrorMessage() {
     if(this.passwordControl.hasError('required')){
-      return 'Vous devez rentrer un email';
+      return 'Vous devez rentrer un mot de passe';
     }
-    else if(this.passwordControl.hasError('email')){
-      return 'Votre email n\' est pas correct';
+    else if(this.passwordControl.hasError('badName')){
+      return 'Votre mot de passe n\' est pas correct';
     }
     else{
-      return 'Votre email est incorrect';
+      return 'Votre mot de passe est incorrect';
     }
   }
 

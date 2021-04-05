@@ -27,7 +27,7 @@ export class ValidatorService {
     const password: string = control.value;
     const condLength = password.length >= 6;
     
-    return condLength ? null : {forbiddenName : {value: password}};
+    return condLength ? null : {badName : {value: password}};
   }
 
   confirmPasswordValidator(control: AbstractControl): ValidationErrors | null {
