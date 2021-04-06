@@ -47,7 +47,7 @@
             [formControl]="emailControl" 
             type="email"
             required>
-            <mat-error *ngIf="emailControl.invalid">{{getMdpErrorMessage()}}</mat-error>
+            <mat-error *ngIf="emailControl.invalid">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="connexion-input">
             <mat-label class="form-label">Password</mat-label>

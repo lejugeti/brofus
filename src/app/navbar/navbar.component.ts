@@ -12,4 +12,10 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  checkUserConnected() {
+    const user = sessionStorage.getItem('user');
+    const cond1 = user !== null;
+    
+    return cond1;
+  }
 }

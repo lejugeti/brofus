@@ -28,13 +28,16 @@
     </div>
     <div id="div-navlink" class="col-7">            
         <a class="nav nav-link" routerLink="/recherche">Calculateur</a>
-        <a class="nav nav-link">WishList</a>
-        <a class="nav nav-link">Historique</a>
+        <a class="nav nav-link" *ngIf="checkUserConnected()">WishList</a>
+        <a class="nav nav-link" *ngIf="checkUserConnected()">Historique</a>
     </div>
-    <div class="col-3 row">    
+    <div class="col-3 row" *ngIf="checkUserConnected()">
         <a class="nav nav-link" routerLink="/inscription">Inscription</a>        
         <a class="nav nav-link" routerLink="/connexion">Connexion</a>
-    </div>    
+    </div>
+    <div class="col-3 row" *ngIf="checkUserConnected()">
+        <div class="nav nav-link">bonjour</div>   
+    </div> 
 </nav>
     
 
