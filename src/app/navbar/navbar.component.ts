@@ -7,15 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
+  user: any = null;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   checkUserConnected() {
-    const user = sessionStorage.getItem('user');
-    const cond1 = user !== null;
+
+    // on essaye de récupérer le user connecté
+    // if(this.user === null){
+    //   this.user = sessionStorage.getItem('user');
+    // }
     
-    return cond1;
+    return this.user !== null;
   }
 }

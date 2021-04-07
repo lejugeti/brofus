@@ -6,7 +6,9 @@ Created on Mon Mar 29 10:42:08 2021
 """
 
 #%%
-cd "C:/Users/Antoine/brofus/fit model"
+
+#cd "C:/Users/Antoine/brofus/fit model"
+cd "C:/Users/aparize/Documents/brofus/fit model"
 
 #%%
 
@@ -15,6 +17,8 @@ from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+
 import matplotlib.pyplot as plt
 
 
@@ -37,7 +41,7 @@ linearReg = linear_model.LinearRegression()
 linearReg.fit(X_train, y_train)
 y_pred = linearReg.predict(X_test)
 
-print(mean_squared_error(y_test, y_pred))
+print(mean_absolute_error(y_test, y_pred))
 
 fig, ax = plt.subplots()
 ax.plot(range(1,testSize+1), y_test, 'o', label="test")

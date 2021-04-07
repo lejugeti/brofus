@@ -93,7 +93,7 @@
             <mat-error *ngIf="confirmPasswordControl.invalid">{{getConfirmMdpErrorMessage()}}</mat-error>
         </mat-form-field>
            
-        <button id="btn-submit" class="btn btn-success form-group" (click)="handleSigningUp(email, password)">Valider mon inscription</button>
+        <button id="btn-submit" class="btn btn-success form-group" (click)="handleSigningUp()">Valider mon inscription</button>
         <button id="btn-alert" class="btn btn-success form-group" (click)="handleLogout()">Logout</button>
         <div>{{passwordControl.value}}</div>
     </form>

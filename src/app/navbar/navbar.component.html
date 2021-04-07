@@ -26,17 +26,24 @@
     <div class="col-2">            
         <a id="title-site" class="navbar-brand">Brofus</a>
     </div>
-    <div id="div-navlink" class="col-7">            
+    <div id="div-navlink" class="col-7" *ngIf="!checkUserConnected()">            
         <a class="nav nav-link" routerLink="/recherche">Calculateur</a>
-        <a class="nav nav-link" *ngIf="checkUserConnected()">WishList</a>
-        <a class="nav nav-link" *ngIf="checkUserConnected()">Historique</a>
     </div>
-    <div class="col-3 row" *ngIf="checkUserConnected()">
+    <div class="col-3 row" *ngIf="!checkUserConnected()">
         <a class="nav nav-link" routerLink="/inscription">Inscription</a>        
         <a class="nav nav-link" routerLink="/connexion">Connexion</a>
     </div>
+
+    <div id="div-navlink" class="col-7" *ngIf="checkUserConnected()">            
+        <a class="nav nav-link" routerLink="/recherche">Calculateur</a>
+        <a class="nav nav-link">WishList</a>
+        <a class="nav nav-link">Historique</a>
+    </div>
     <div class="col-3 row" *ngIf="checkUserConnected()">
-        <div class="nav nav-link">bonjour</div>   
+        <div class="nav nav-link">Connecté</div>   
+        <a class="nav nav-link" routerLink="/connexion">Connexion</a>
+        <!-- <button mat-button>{{user.}}</button>  -->
+
     </div> 
 </nav>
     

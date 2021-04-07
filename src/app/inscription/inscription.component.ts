@@ -27,8 +27,8 @@ export class InscriptionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleSigningUp(email:string, password: string) {
-    this.auth.signUpEmailPassword(this.emailControl.value, this.passwordControl.value);
+  handleSigningUp() {
+    this.auth.signUpEmailPassword(this.emailControl.value, this.passwordControl.value, this.loginControl.value);
     console.log("inscription");
   }
 
