@@ -48,10 +48,18 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.setItem('user', '');
-    this.auth.signOut();
-    alert('Vous avez été déconnecté !');
+    
+    return this.auth.signOut()
+    .then(res => {
+      localStorage.setItem('user', '');
+      alert('Vous avez été déconnecté !')
+
+      return new Promise<boolean>((resolve, reject) => {
+        resolve(true);
+      })
+    })
+    .catch(error => alert(error));
+    
   }
 
-  
 }
