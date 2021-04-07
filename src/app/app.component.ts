@@ -17,12 +17,9 @@ export class AppComponent {
     // this.router.navigate(['/connexion']);
     // console.log(localStorage.getItem("user"));
 
+    // initialise l'instance du user à l'arrivée sur le site sauf s'il est déjà connecté
     if(localStorage.length == 0){
       localStorage.setItem('user', '');
     }
   };
-  
-  handleLogout(){
-    this.auth.logout();
-  }
 }

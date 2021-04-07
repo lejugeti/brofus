@@ -34,12 +34,9 @@ export class AuthService {
 
   loginEmailPassword(email: string, password: string){
     this.auth.signInWithEmailAndPassword(email, password)
-    .then(user =>{
+    .then(user => {
       this.userData = user;
       localStorage.setItem('user', JSON.stringify(this.userData));
-      // console.log(localStorage.getItem('user'));
-      // sessionStorage.setItem('user', JSON.stringify(this.userData));
-      // console.log(sessionStorage.getItem('user'));
       this.router.navigate(['/recherche']);
     })
     .catch(err => {
@@ -62,4 +59,8 @@ export class AuthService {
     
   }
 
+  private getUserByMail(email: string){
+    
+    return this.afs.collection<any>('users').valueChanges();
+  }
 }

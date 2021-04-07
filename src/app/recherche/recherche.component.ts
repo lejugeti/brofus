@@ -45,10 +45,6 @@ export class RechercheComponent implements OnInit {
       .valueChanges().subscribe(items =>{
       this.itemsToShow = items;
       this.equipements = items;
-      // console.log(this.itemsToShow[0]);
-      // console.log(this.filterService.extractStats(this.itemsToShow[0]));
-      // console.log(this.filterService.checkStatTags(["% Résistance Terre"], this.filterService.extractStats(this.itemsToShow[0])));
-
     })
     
     
