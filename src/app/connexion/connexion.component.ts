@@ -15,7 +15,7 @@ export class ConnexionComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private validatorService: ValidatorService) { }
+    private validatorService: ValidatorService) {}
 
   ngOnInit(): void {
   }

@@ -26,23 +26,27 @@
     <div class="col-2">            
         <a id="title-site" class="navbar-brand">Brofus</a>
     </div>
-    <div id="div-navlink" class="col-7" *ngIf="!checkUserConnected()">            
+    <div id="div-navlink" class="col-7" *ngIf="!checkIfUserIsConnected()">            
         <a class="nav nav-link" routerLink="/recherche">Calculateur</a>
     </div>
-    <div class="col-3 row" *ngIf="!checkUserConnected()">
+    <div class="col-3 row" *ngIf="!checkIfUserIsConnected()">
         <a class="nav nav-link" routerLink="/inscription">Inscription</a>        
         <a class="nav nav-link" routerLink="/connexion">Connexion</a>
     </div>
 
-    <div id="div-navlink" class="col-7" *ngIf="checkUserConnected()">            
+    <div id="div-navlink" class="col-7" *ngIf="checkIfUserIsConnected()">            
         <a class="nav nav-link" routerLink="/recherche">Calculateur</a>
         <a class="nav nav-link">WishList</a>
         <a class="nav nav-link">Historique</a>
     </div>
-    <div class="col-3 row" *ngIf="checkUserConnected()">
-        <div class="nav nav-link">Connecté</div>   
-        <a class="nav nav-link" routerLink="/connexion">Connexion</a>
-        <!-- <button mat-button>{{user.}}</button>  -->
+    <div class="col-3 row" *ngIf="checkIfUserIsConnected()">
+        <!-- <div class="nav nav-link">Connecté</div>    -->
+        <!-- <a class="nav nav-link" routerLink="/connexion">Connexion</a> -->
+        <button mat-button [matMenuTriggerFor]="menu" class="nav-link">Bonjour</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>bonjour</button>
+            <button mat-menu-item>yo</button>
+        </mat-menu>
 
     </div> 
 </nav>

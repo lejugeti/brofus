@@ -7,20 +7,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  user: any = null;
+  user: any; 
 
   constructor() { }
 
   ngOnInit(): void {
+    this.user = localStorage.getItem('user');
+    this.checkIfUserIsConnected();
+    // console.log(localStorage.getItem('user'));
   }
 
-  checkUserConnected() {
-
+  checkIfUserIsConnected() {
     // on essaye de récupérer le user connecté
-    // if(this.user === null){
-    //   this.user = sessionStorage.getItem('user');
-    // }
-    
-    return this.user !== null;
+    if(this.user === ''){
+      this.user = localStorage.getItem('user')
+      // console.log(this.user);
+    }
+    // console.log(localStorage);
+    // this.user = localStorage.getItem('user');
+
+    return this.user !== '';
   }
 }

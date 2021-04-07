@@ -36,7 +36,10 @@ export class AuthService {
     this.auth.signInWithEmailAndPassword(email, password)
     .then(user =>{
       this.userData = user;
-      sessionStorage.setItem('user', JSON.stringify(this.userData));
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      // console.log(localStorage.getItem('user'));
+      // sessionStorage.setItem('user', JSON.stringify(this.userData));
+      // console.log(sessionStorage.getItem('user'));
       this.router.navigate(['/recherche']);
     })
     .catch(err => {
@@ -45,7 +48,7 @@ export class AuthService {
   }
 
   logout() {
-    sessionStorage.clear();
+    localStorage.setItem('user', '');
     this.auth.signOut();
     alert('Vous avez été déconnecté !');
   }
