@@ -7,8 +7,8 @@ Created on Mon Mar 29 10:42:08 2021
 
 #%%
 
-#cd "C:/Users/Antoine/brofus/fit model"
-cd "C:/Users/aparize/Documents/brofus/fit model"
+cd "C:/Users/Antoine/brofus/fit model"
+#cd "C:/Users/aparize/Documents/brofus/fit model"
 
 #%%
 
@@ -21,13 +21,17 @@ from sklearn.metrics import mean_absolute_error
 
 import matplotlib.pyplot as plt
 
-
+from "functions.py" import *
 #%% nettoyage data
 dfBrisage = pd.read_csv("brisage.csv")
-
+poids = pd.read_json("poids.json", encoding="utf-8")
 cleanBrisage = dfBrisage.drop(axis=1, columns=["type", "Craft", "Kamas"])
 cleanBrisage = cleanBrisage.fillna(0)
-print(cleanBrisage)
+#print(cleanBrisage)
+#print(poids)
+
+statsItems = cleanBrisage.iloc[:, 5:]
+
 
 #%% regression linéaire train_test_split
 
