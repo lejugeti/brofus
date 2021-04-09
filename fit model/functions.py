@@ -8,7 +8,7 @@ Created on Thu Apr  8 16:11:49 2021
 def computeItemWeight(stats, poids):
     
     total = 0
-    for stat in stats.columns:
+    for stat in stats.index:
         montant = stats[stat]
         if(montant>0):
             total += montant

@@ -21,7 +21,8 @@ from sklearn.metrics import mean_absolute_error
 
 import matplotlib.pyplot as plt
 
-from "functions.py" import *
+from functions import *
+
 #%% nettoyage data
 dfBrisage = pd.read_csv("brisage.csv")
 poids = pd.read_json("poids.json", encoding="utf-8")
@@ -31,8 +32,9 @@ cleanBrisage = cleanBrisage.fillna(0)
 #print(poids)
 
 statsItems = cleanBrisage.iloc[:, 5:]
-
-
+weightItem = pd.Series([computeItemWeight(statsItems.loc[i],poids) for i in range(len(statsItems))], name="Poids")
+data = pd.concat([cleanBrisage[["nom", "Niveau", "Poids focus", "Coef", "Nb runes"]], weightItem], axis=1)
+print(data)
 #%% regression linéaire train_test_split
 
 X = cleanBrisage.drop(columns=["nom", "Nb runes"])
