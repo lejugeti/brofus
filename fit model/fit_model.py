@@ -35,30 +35,27 @@ statsItems = cleanBrisage.iloc[:, 5:]
 weightItem = pd.Series([computeItemWeight(statsItems.loc[i],poids) for i in range(len(statsItems))], name="Poids")
 data = pd.concat([cleanBrisage[["nom", "Niveau", "Poids focus", "Coef", "Nb runes"]], weightItem], axis=1)
 print(data)
-#%% regression linéaire train_test_split
 
-X = cleanBrisage.drop(columns=["nom", "Nb runes"])
-y = cleanBrisage["Nb runes"]
-
+X = data.drop(columns=["nom", "Nb runes"])
+y = data["Nb runes"]
 testSize = 15
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSize)
+#%% regression linéaire train_test_split
 
 linearReg = linear_model.LinearRegression()
 linearReg.fit(X_train, y_train)
-y_pred = linearReg.predict(X_test)
+plotPredictions(linearReg, X_test, y_test)
 
-print(mean_absolute_error(y_test, y_pred))
+#%% régression lasso
 
-fig, ax = plt.subplots()
-ax.plot(range(1,testSize+1), y_test, 'o', label="test")
-ax.plot(range(1,testSize+1), y_pred, 'o', label="pred")
-ax.legend()
-ax.set_xlabel("Essais")
-ax.set_ylabel("Nombre de runes")
-fig.suptitle("Modèle régression linéaire")
-plt.show()
+lassoReg = linear_model.Lasso()
+lassoReg.fit(X_train, y_train)
+plotPredictions(lassoReg, X_test, y_test)
+#%% Lasso AIC
 
-
+lassoRegIC = linear_model.LassoLarsIC()
+lassoRegIC.fit(X_train, y_train)
+plotPredictions(lassoRegIC, X_test, y_test)
 #%% régression linéaire cross_val_score
 
 X = cleanBrisage.drop(columns=["nom", "Nb runes"])
