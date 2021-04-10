@@ -1,3 +1,3 @@
 export interface IObject {
-    [key: string]: number,
+    [key: string]: any,
 }

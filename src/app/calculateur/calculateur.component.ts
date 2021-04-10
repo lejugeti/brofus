@@ -10,9 +10,7 @@ import { IObject } from '../interfaces/object.interface';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { serveurs } from '../services/serveurs'
-import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-calculateur',

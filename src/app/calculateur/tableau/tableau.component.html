@@ -10,11 +10,14 @@
     }
 </style>
 
-<img src="../../../assets/icons/Action_Point.svg" class="icon"/>
+
 <mat-table [dataSource]="tableauStats" class="mat-elevation-z8">
     <ng-container matColumnDef="Statistique">
         <mat-header-cell *matHeaderCellDef>Statistique</mat-header-cell>
-        <mat-cell *matCellDef="let stat">{{ stat.name }}</mat-cell>
+        <mat-cell *matCellDef="let stat">
+            {{ stat.name }}
+            <img src="{{path+pathRunes[stat.name]}}">
+        </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="Montant">

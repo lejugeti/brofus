@@ -24,7 +24,6 @@ export const poids: IObject = {
     'Dommages Air': 5,
     'Dommages Feu': 5,
     'Dommages Eau': 5,
-    'Dommages Pou': 5,
     'Dommages Poussée': 5,
     'Résistance Critiques': 2,
     'Résistance Neutre': 2,

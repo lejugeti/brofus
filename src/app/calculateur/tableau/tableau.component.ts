@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { CalculateurItemService } from '../../services/calculateur.item.service'
 import { Item } from '../../interfaces/item.interface';
+import { path, pathRunes } from './paths.icons';
 
 @Component({
   selector: 'app-tableau',
@@ -19,7 +20,11 @@ export class TableauComponent implements OnInit {
   tableauStats: any[];
   puiItem: number;
   displayedColumns: string[] = ['Statistique', 'Montant', 'QuantiteRunes', 'PrixRune', 'TotalGain', 'Rentabilite', 'CoefNecessaire']
+  svgStyle = { 'width.em': 2 }
 
+  path = path;
+  pathRunes = pathRunes;
+  
   constructor(
     private calculateur: CalculateurItemService,
     private iconRegister: MatIconRegistry){ 
@@ -83,4 +88,6 @@ export class TableauComponent implements OnInit {
   getCoefRentabilite(montantStat: number, puiStat: number, prixRune: number) {
     return this.calculateur.calculCoefRentabilite(montantStat, puiStat, this.puiMin, this.prixCraft, prixRune, this.coefficient).toFixed(2);
   }
+
+
 }
