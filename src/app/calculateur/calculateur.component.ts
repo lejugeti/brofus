@@ -6,7 +6,6 @@ import { GetItemsService } from '../services/get-items.service';
 import { ItemService } from '../services/item.service';
 import { CalculateurItemService } from '../services/calculateur.item.service';
 import { DofapiItem, Item } from '../interfaces/item.interface';
-import { IObject } from '../interfaces/object.interface';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { serveurs } from '../services/serveurs'
@@ -37,7 +36,6 @@ export class CalculateurComponent implements OnInit {
     Validators.required,
     Validators.pattern('[1-9]*')
   ])
-
   
   constructor(private itemService: GetItemsService, 
     private route: ActivatedRoute, 
