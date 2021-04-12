@@ -7,9 +7,9 @@ class ImgSpider(scrapy.Spider):
     
     def start_requests(self):
         start_urls = [
-            'https://fr.wikipedia.org/wiki/Paris'
+            'https://www.dofus.com/fr/mmorpg/encyclopedie/equipements/14076-coiffe-comte-harebourg'
         ]
-
+        
         for url in start_urls:
             # token, agent = cfscrape.get_tokens(url)
             # yield scrapy.Request(url=url, cookies=token, headers={'User-Agent': agent}, callback=self.parse)
