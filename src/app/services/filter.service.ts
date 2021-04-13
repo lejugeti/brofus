@@ -29,7 +29,7 @@ export class FilterService {
   filterItems(tags: Tags, levelMin: number, levelMax: number, itemList: Array<Item>) {
 
     let lvlFiltered = this.filterByLevel(levelMin, levelMax, itemList);
-    console.log(lvlFiltered);
+    // console.log(lvlFiltered);
     if(tags.stats.length !== 0 || tags.types.length !== 0){
       let typeFiltered = this.filterByTypes(tags.types, lvlFiltered);
       let newItemList = this.filterByStats(tags.stats, typeFiltered);

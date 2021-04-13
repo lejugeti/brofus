@@ -42,7 +42,7 @@
     <div class="col-3 row" *ngIf="checkIfUserIsConnected()">
         <!-- <div class="nav nav-link">Connecté</div>    -->
         <!-- <a class="nav nav-link" routerLink="/connexion">Connexion</a> -->
-        <button mat-button [matMenuTriggerFor]="menu" class="nav-link">Bonjour</button>
+        <button mat-button [matMenuTriggerFor]="menu" class="nav-link">{{user.login}}</button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item>Profil</button>
             <button mat-menu-item (click)=logout()>Déconnexion</button>

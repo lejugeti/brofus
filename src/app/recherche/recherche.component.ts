@@ -67,7 +67,7 @@ export class RechercheComponent implements OnInit {
     else if(tag.type === 'stat'){
       this.tags.stats.push(tag.name);
     }
-    console.log(this.tags.stats);
+    // console.log(this.tags.stats);
     this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
   }
 
@@ -79,7 +79,7 @@ export class RechercheComponent implements OnInit {
       this.tags.stats = this.tags.stats.filter(stat => stat !== tag.name);
     }
 
-    console.log(this.tags.stats);
+    // console.log(this.tags.stats);
     this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
   }
 
@@ -88,7 +88,7 @@ export class RechercheComponent implements OnInit {
     this.levelMax = levelValues.max;
     this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
     
-    console.log(`Min : ${this.levelMin} \nMin : ${this.levelMax}`);
+    // console.log(`Min : ${this.levelMin} \nMin : ${this.levelMax}`);
   }
 }
 

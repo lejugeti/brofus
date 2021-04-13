@@ -104,7 +104,6 @@ export class FiltresComponent implements OnInit {
   }
 
   handleLevelChange() {
-    // console.log("change");
     this.changeLvlEvent.emit(this.levelValues);
   }
 }
