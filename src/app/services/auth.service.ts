@@ -27,17 +27,29 @@ export class AuthService {
       // console.log(this.userData);
 
       const userCollection = this.afs.collection('users');
-      userCollection.add({login: login, email: email, password: password});
+      userCollection.add({login: login, email: email});
+      // userCollection.add({login: login, email: email, password: password});
     })
     .catch(error => alert(error));
   }
 
   loginEmailPassword(email: string, password: string){
-    this.auth.signInWithEmailAndPassword(email, password)
+    return this.auth.signInWithEmailAndPassword(email, password)
     .then(user => {
-      this.userData = user;
-      localStorage.setItem('user', JSON.stringify(this.userData));
-      this.router.navigate(['/recherche']);
+      const userCollection = this.afs.collection<any>('users', ref => ref.where("email", "==", email));
+      
+      return userCollection.valueChanges().subscribe(userData => {
+        this.userData = userData;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        // console.log(localStorage.getItem('user'));
+        // this.router.navigate(['/recherche']);
+
+        return new Promise<boolean>((resolve, reject) => {
+          resolve(true);
+          reject(false);
+        });
+      })
+      
     })
     .catch(err => {
       alert(err);
@@ -53,6 +65,7 @@ export class AuthService {
 
       return new Promise<boolean>((resolve, reject) => {
         resolve(true);
+        reject(false);
       })
     })
     .catch(error => alert(error));

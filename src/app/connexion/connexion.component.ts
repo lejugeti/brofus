@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { ValidatorService } from '../services/validator.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-connexion',
@@ -15,14 +16,16 @@ export class ConnexionComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private validatorService: ValidatorService) {}
+    private validatorService: ValidatorService,
+    private router: Router) {}
 
   ngOnInit(): void {
   }
 
   handleLogin(email:string, password: string){
-    this.auth.loginEmailPassword(email, password);
-    console.log("loging");
+    this.auth.loginEmailPassword(email, password).then(res => {
+      this.router.navigate(['/recherche']);
+    });
   }
 
   getEmailErrorMessage() {

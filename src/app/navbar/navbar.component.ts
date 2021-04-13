@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   }
 
   checkIfUserIsConnected() {
-    // on essaye de récupérer le user connecté
+    // on essaye de récupérer un user s'il est connecté
     if(this.user === ''){
       this.user = localStorage.getItem('user')
     }
