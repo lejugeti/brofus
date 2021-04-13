@@ -10,6 +10,7 @@ import firebase from 'firebase/app';
 export class AuthService {
 
   userData: any;
+  userSubscription: any = null;
 
   constructor(
     public auth: AngularFireAuth,
@@ -38,17 +39,14 @@ export class AuthService {
     .then(async (user) => {
       const userCollection = this.afs.collection<any>('users', ref => ref.where("email", "==", email));
       
-      const subscription = userCollection.valueChanges().subscribe(userData => {
+      this.userSubscription = userCollection.valueChanges().subscribe(userData => {
         this.userData = userData;
         localStorage.setItem('user', JSON.stringify(this.userData));
         // console.log(localStorage.getItem('user'));
         this.router.navigate(['/recherche']);
-        console.log("bug");
+        this.userSubscription.unsubscribe();
       })
-      
-      // await subscription;
-      // subscription.unsubscribe();
-      
+            
     })
     .catch(err => {
       alert(err);
