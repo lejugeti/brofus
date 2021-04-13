@@ -34,7 +34,7 @@
 
         <div id="liste-equipements">
             <div *ngFor="let item of itemsToShow">
-                <app-equipement [item]=item></app-equipement>
+                <app-equipement [item]=item [isWished]="itemIsWished(item)" (wishChangeEvent)="updateWishlist($event)"></app-equipement>
             </div>
         </div>
     </div>

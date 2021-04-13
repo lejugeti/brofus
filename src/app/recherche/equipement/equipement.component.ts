@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DofapiItem, Item } from '../../interfaces/item.interface';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-equipement',
@@ -12,11 +13,11 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 export class EquipementComponent implements OnInit {
 
   @Input() item: Item;
-  itemId: number;
+  @Input() isWished: boolean = false;
+  @Output() wishChangeEvent = new EventEmitter<Object>();
   faHeart = faHeart;
-  imgUrl: string;
 
-  constructor() { 
+  constructor(private afs: AngularFirestore) { 
     this.item = { 
       id: 0,
       ankamaId: 0,
@@ -26,14 +27,16 @@ export class EquipementComponent implements OnInit {
       imgUrl: '',
       statistics: [],
     };
-
-    this.itemId = this.item.id;
-    this.imgUrl = '';
   }
   
   ngOnInit(): void {
-    // console.log(this.item);
-
+    console.log(this.item);
   }
 
+  handleWishChange() {
+    this.isWished = !this.isWished;
+    this.wishChangeEvent.emit({id: this.item.id, isWished: this.isWished});
+    console.log({id: this.item.id, isWished: this.isWished});
+  }
+  
 }

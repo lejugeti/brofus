@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
         this.user = tempUser;
       }
       else{
-        this.user = JSON.parse(tempUser)[0];
+        this.user = JSON.parse(tempUser);
       }
     }    
   }

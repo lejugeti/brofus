@@ -40,7 +40,7 @@ export class AuthService {
       const userCollection = this.afs.collection<any>('users', ref => ref.where("email", "==", email));
       
       this.userSubscription = userCollection.valueChanges().subscribe(data => {
-        this.userData = JSON.stringify(data);
+        this.userData = JSON.stringify(data[0]);
         localStorage.setItem('user', this.userData);
         this.router.navigate(['/recherche']);
         this.userSubscription.unsubscribe();

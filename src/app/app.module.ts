@@ -43,6 +43,7 @@ import { BddUpdaterComponent } from './bdd.updater/bdd.updater.component';
 /// CONFIGS
 //
 import { environment } from '../environments/environment';
+import { FavoriComponent } from './recherche/equipement/favori/favori.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { environment } from '../environments/environment';
     EquipementComponent,
     CalculateurComponent,
     TableauComponent,
-    BddUpdaterComponent
+    BddUpdaterComponent,
+    FavoriComponent
   ],
   imports: [
     BrowserModule,

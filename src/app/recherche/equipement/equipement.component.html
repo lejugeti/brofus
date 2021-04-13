@@ -53,8 +53,8 @@
 </style>
 
 
-<div id="equipement-container" [routerLink]="['/calculateur', item.id]">
-    <div id="entete">
+<div id="equipement-container">
+    <div id="entete" [routerLink]="['/calculateur', item.id]">
         <img src="https://static.ankama.com/dofus/www/game/items/200/10243.png"/>
 
         <div id="description">
@@ -81,7 +81,7 @@
         </div>
     </div> -->
     <div id="logos">
-        <fa-icon [icon]="faHeart" class="single-logo"></fa-icon>
+        <fa-icon [icon]="faHeart" class="single-logo" (click)="handleWishChange()"></fa-icon>
         <fa-icon [icon]="faHeart" class="single-logo"></fa-icon>
     </div>
 </div>

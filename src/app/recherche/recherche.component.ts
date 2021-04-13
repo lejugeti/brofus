@@ -22,6 +22,7 @@ export class RechercheComponent implements OnInit {
   tags: Tags = new Tags([], []);
   levelMin: number = 0;
   levelMax: number = 200;
+  wishList: Item[] = [];
 
   constructor(
     private itemsService: GetItemsService,
@@ -46,6 +47,7 @@ export class RechercheComponent implements OnInit {
       this.itemsToShow = items;
       this.equipements = items;
     })
+    
     
     
   }
@@ -89,6 +91,14 @@ export class RechercheComponent implements OnInit {
     this.itemsToShow = this.filterService.searchAndFilter(this.recherche, this.tags, this.levelMin, this.levelMax, this.equipements);
     
     // console.log(`Min : ${this.levelMin} \nMin : ${this.levelMax}`);
+  }
+
+  itemIsWished(item: Item) {
+    return false;
+  }
+
+  updateWishlist(data: any){
+    
   }
 }
 
