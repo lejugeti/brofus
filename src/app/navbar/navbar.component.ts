@@ -15,20 +15,21 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.user = localStorage.getItem('user');
+    // this.user = localStorage.getItem('user');
+    this.getUser();
+    // console.log(localStorage);
   }
 
   checkIfUserIsConnected() {
     // on essaye de récupérer un user s'il est connecté
     if(this.user === ''){
-      this.user = localStorage.getItem('user')
+      this.getUser();
     }
-
     return this.user !== '';
   }
 
 
-  logout(){
+  logout() {
     this.authService.logout()
     .then(success => {
       if(success){
@@ -36,5 +37,24 @@ export class NavbarComponent implements OnInit {
       }
     })
     .catch(err => alert(err));
+  }
+
+  getUser() {
+    const tempUser: string | null = localStorage.getItem('user');
+    
+    if(tempUser !== null){
+      
+      if(tempUser === ''){
+        this.user = tempUser;
+      }
+      else{
+        this.user = JSON.parse(tempUser)[0];
+        console.log(tempUser);
+      }
+    }
+    else {
+      this.user = '';
+    }
+    
   }
 }

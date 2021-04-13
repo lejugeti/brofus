@@ -34,21 +34,20 @@ export class AuthService {
   }
 
   loginEmailPassword(email: string, password: string){
-    return this.auth.signInWithEmailAndPassword(email, password)
-    .then(user => {
+    this.auth.signInWithEmailAndPassword(email, password)
+    .then(async (user) => {
       const userCollection = this.afs.collection<any>('users', ref => ref.where("email", "==", email));
       
-      return userCollection.valueChanges().subscribe(userData => {
+      const subscription = userCollection.valueChanges().subscribe(userData => {
         this.userData = userData;
         localStorage.setItem('user', JSON.stringify(this.userData));
         // console.log(localStorage.getItem('user'));
-        // this.router.navigate(['/recherche']);
-
-        return new Promise<boolean>((resolve, reject) => {
-          resolve(true);
-          reject(false);
-        });
+        this.router.navigate(['/recherche']);
+        console.log("bug");
       })
+      
+      // await subscription;
+      // subscription.unsubscribe();
       
     })
     .catch(err => {
@@ -61,6 +60,7 @@ export class AuthService {
     return this.auth.signOut()
     .then(res => {
       localStorage.setItem('user', '');
+      // console.log(localStorage);
       alert('Vous avez été déconnecté !')
 
       return new Promise<boolean>((resolve, reject) => {

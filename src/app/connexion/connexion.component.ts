@@ -23,9 +23,7 @@ export class ConnexionComponent implements OnInit {
   }
 
   handleLogin(email:string, password: string){
-    this.auth.loginEmailPassword(email, password).then(res => {
-      this.router.navigate(['/recherche']);
-    });
+    this.auth.loginEmailPassword(email, password);
   }
 
   getEmailErrorMessage() {
