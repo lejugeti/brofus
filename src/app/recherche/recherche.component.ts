@@ -9,6 +9,8 @@ import { ILevelFilter } from '../interfaces/level.filter.interface';
 import { DofapiItem, Item } from '../interfaces/item.interface';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
+import { User } from '../services/classes/user.class';
+
 @Component({
   selector: 'app-recherche',
   templateUrl: './recherche.component.html',
@@ -48,6 +50,7 @@ export class RechercheComponent implements OnInit {
       this.equipements = items;
     })
     
+    const user = new User("lejugeti", this.afs);
     
     
   }
