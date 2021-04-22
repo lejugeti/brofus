@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { CalculateurItemService } from '../../services/calculateur.item.service'
 import { Item } from '../../interfaces/item.interface';
@@ -17,14 +17,14 @@ export class TableauComponent implements OnInit {
   @Input() coefficient: number;
   @Input() prixCraft: number;
   
+  puiItem : number;
   tableauStats: any[];
-  puiItem: number;
   displayedColumns: string[] = ['Statistique', 'Montant', 'QuantiteRunes', 'PrixRune', 'TotalGain', 'Rentabilite', 'CoefNecessaire']
   svgStyle = { 'width.em': 2 }
 
   path = path;
   pathRunes = pathRunes;
-  
+
   constructor(
     private calculateur: CalculateurItemService,
     private iconRegister: MatIconRegistry){ 

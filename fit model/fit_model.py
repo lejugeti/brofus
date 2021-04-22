@@ -7,7 +7,7 @@ Created on Mon Mar 29 10:42:08 2021
 
 #%%
 
-cd "C:/Users/Antoine/brofus/fit model"
+cd "C:/Users/Antoine/brofus/fit model/"
 #cd "C:/Users/aparize/Documents/brofus/fit model"
 
 #%%
@@ -63,7 +63,10 @@ y = cleanBrisage["Nb runes"]
 
 linearReg = linear_model.LinearRegression()
 
-print(cross_val_score(linearReg, X, y, cv=3, scoring="neg_mean_squared_error"))
+nbCv = 5
+cv = cross_val_score(lassoReg, X, y, cv=nbCv, scoring="neg_mean_absolute_error")
 
-
+plt.plot(range(nbCv), cv, 'o')
+plt.xlabel('Cross validation n°')
+plt.ylabel('Neg mean absolute error')
 

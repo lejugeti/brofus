@@ -25,7 +25,7 @@ def plotPredictions(model, X, y):
     ax.plot(range(1,len(y)+1), y, 'o', label="test")
     ax.plot(range(1,len(y)+1), y_pred, 'o', label="pred")
     ax.legend()
-    ax.set_xlabel("Essais")
+    ax.set_xlabel("ytest n°")
     ax.set_ylabel("Nombre de runes")
     fig.suptitle("Modèle régression linéaire")
     plt.show()
