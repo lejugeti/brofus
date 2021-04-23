@@ -1,27 +1,14 @@
 # Brofus
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.0.
+## Description
 
-## Development server
+Ce projet vise à développer une plateforme web en Angular pour aider les joueurs de Dofus dans le brisage de leurs items en jeu
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Installation
+1. Télécharger cette archive
+1. Ouvrir un promt node.js
+1. Accéder au dossier 'your/path/brofus/'
+1. Lancer la commande `npm install` pour installer les différents packages utiles pour le site
+1. Lancer la commande `npm start` qui lancera la compilation du code
+1. Ouvrir votre navigateur et accéder au site via http://localhost:4200
+1. Enjoy
